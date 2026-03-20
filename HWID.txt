@@ -1,2 +1,5 @@
-0483b45c9d353c9bd3261b94db8748742096e5a2e1f59ce4b8a62352c2cd83aa
-f8ab078b04d4d2dac89a72667b1f5edc24289fd5c29ef8e2814308171b1153b3
+allowed_hwids = [
+        "f8ab078b04d4d2dac89a72667b1f5edc24289fd5c29ef8e2814308171b1153b3", # Twoj pierwszy
+        "0483b45c9d353c9bd3261b94db8748742096e5a2e1f59ce4b8a62352c2cd83aa",                                            # Kolejny
+        "trzeci_hash_tutaj"                                              # I tak dalej...
+    
