@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mortal DDoS </title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
+body{background:#050505;color:#fff;cursor:none;overflow-x:hidden;scroll-behavior:smooth;}
+.cursor{width:12px;height:12px;background:white;border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transition: transform 0.1s ease;}
+
+/* HEADER */
+header{padding:20px 50px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(10px);position:fixed;width:100%;z-index:100;}
+.logo img{height:60px;filter:drop-shadow(0 0 25px red);border-radius:12px;transition:0.3s;}
+.logo img:hover{transform:scale(1.05);}
+nav a{margin-left:20px;color:#aaa;text-decoration:none;padding:6px 12px;border-radius:12px;transition:.4s;}
+nav a:hover{background:red;color:#fff;}
+
+/* BUTTON */
+.btn{margin-top:15px;padding:12px 25px;border:none;border-radius:25px;background:linear-gradient(135deg,#ff1a1a,#ff3c3c);color:#fff;cursor:pointer;transition:.4s;font-size:14px;}
+.btn:hover{transform:translateY(-4px) scale(1.05);box-shadow:0 0 30px red;}
+
+/* HERO */
+.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden;padding-top:80px;}
+.hero h1{font-size:64px;color:#ff1a1a;text-shadow:0 0 25px red;animation:fadeUp 1s ease;}
+.hero p{margin-top:20px;color:#ccc;}
+
+/* PRICING CARDS */
+.section{padding:100px 50px;display:flex;flex-direction:column;align-items:center;gap:40px;position:relative;min-height:60vh;}
+.cards-container{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;width:100%;}
+.card{background:#111;padding:25px;border-radius:20px;text-align:center;width:220px;transition:.5s;position:relative;}
+.card:hover{transform:translateY(-8px) scale(1.05);box-shadow:0 0 35px red;}
+.card h3{color:#ff1a1a;margin-bottom:8px;}
+.card p{color:#ccc;font-size:14px;line-height:1.3;margin-bottom:10px;}
+
+/* PROGRAM IMAGE */
+.program-image{max-width:600px;width:90%;border-radius:12px;filter:drop-shadow(0 0 25px red);}
+
+/* MODAL */
+.modal{position:fixed;width:100%;height:100%;background:rgba(0,0,0,0.85);display:none;justify-content:center;align-items:center;z-index:1000;}
+.modal-content{background:#111;padding:30px;border-radius:20px;width:300px;text-align:center;}
+.modal-content p.notice{color:#ccc;margin-bottom:15px;font-size:14px;}
+.modal input{width:100%;margin:10px 0;padding:10px;border:none;border-radius:10px;}
+.modal button{width:100%;padding:10px;border:none;background:red;color:#fff;border-radius:10px;margin-top:10px;}
+
+/* PARTICLES */
+.star{position:absolute;width:6px;height:6px;background:red;box-shadow:0 0 15px red;border-radius:50%;animation: float linear infinite;}
+@keyframes float{0%{transform:translateY(0);opacity:0.8;}50%{opacity:0.3;}100%{transform:translateY(-400px);opacity:0;}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(50px);transition: all 1s cubic-bezier(.2,.8,.2,1);}
+.reveal.active{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<div class="cursor"></div>
+
+<header>
+  <div class="logo"><img src="https://i.imgur.com/w351ZJ6.png" alt="Mortal Logo"></div>
+  <nav>
+    <a href="#hero">Home</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#" onclick="openModal()">Login</a>
+  </nav>
+</header>
+
+<section class="hero" id="hero">
+  <h1>Mortal DDoS </h1>
+  <p>Advanced DDoS Tool</p>
+  <button class="btn" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Pricing</button>
+</section>
+
+<section class="section reveal" id="pricing">
+  <img src="https://i.imgur.com/EmT582z.png" alt="Mortal DDoS Program" class="program-image">
+  <div class="cards-container">
+    <div class="card">
+      <h3>Lifetime</h3>
+      <p>Full unlimited access to MortalDDoS software with advanced DDoS tools, lifetime updates and support.</p>
+      <button class="btn" onclick="window.open('https://tipply.pl/@kapiczektm','_blank')">Buy</button>
+    </div>
+    <div class="card">
+      <h3>30 Days</h3>
+      <p>Temporary 30-day subscription for testing MortalDDoS features.</p>
+      <button class="btn" onclick="window.open('https://tipply.pl/@kapiczektm','_blank')">Buy</button>
+    </div>
+  </div>
+</section>
+
+<!-- LOGIN MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <p class="notice">You don’t have account? Create your account now!</p>
+    <input type="text" placeholder="Email">
+    <input type="password" placeholder="Password">
+    <button>Login</button>
+    <button style="background:#333;">Register</button>
+  </div>
+</div>
+
+<script>
+/* CURSOR */
+const cursor=document.querySelector('.cursor');
+document.addEventListener('mousemove',e=>{
+  cursor.style.top=e.clientY+'px';
+  cursor.style.left=e.clientX+'px';
+});
+
+/* MODAL */
+function openModal(){document.getElementById('modal').style.display='flex';}
+window.onclick=function(e){if(e.target.id==='modal')document.getElementById('modal').style.display='none';}
+
+/* SMOOTH SCROLL */
+document.querySelectorAll('nav a[href^="#"]').forEach(anchor=>{
+  anchor.addEventListener('click',function(e){
+    e.preventDefault();
+    const target=document.querySelector(this.getAttribute('href'));
+    target.scrollIntoView({behavior:'smooth'});
+  });
+});
+
+/* REVEAL ON SCROLL */
+const reveals=document.querySelectorAll('.reveal');
+window.addEventListener('scroll',()=>{
+  reveals.forEach(el=>{
+    const top=el.getBoundingClientRect().top;
+    if(top<window.innerHeight-100)el.classList.add('active');
+  });
+});
+
+/* PARTICLES EVERYWHERE */
+function createParticles(parent,count){
+  for(let i=0;i<count;i++){
+    let star=document.createElement('div');
+    star.classList.add('star');
+    star.style.left=Math.random()*100+'%';
+    star.style.top=Math.random()*100+'%';
+    star.style.width=(Math.random()*8+4)+'px';
+    star.style.height=(Math.random()*8+4)+'px';
+    star.style.animationDuration=(Math.random()*6+6)+'s';
+    parent.appendChild(star);
+  }
+}
+createParticles(document.body,150);
+</script>
+
+</body>
+</html>
